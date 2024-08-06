@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public enum TurnList
@@ -14,14 +16,15 @@ public enum TurnList
 public class TurnManager : MonoBehaviour
 {
     public static TurnList currentTurn = TurnList.P1;
+    public event Action<int> WeightStart;
 
     public Button endTurnButton;
+    public float eachWeightTime = 5.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         currentTurn = TurnList.P1;
-        //StartCoroutine("temp");
     }
 
     // Update is called once per frame
@@ -41,15 +44,17 @@ public class TurnManager : MonoBehaviour
     public void EndTurnClicked()
     {
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
+        StartCoroutine("BoatTurn");
     }
 
-    IEnumerator temp()
+    // YJK, 무게별 함선들을 eachWeightTime마다 시작하라는 이벤트 보냄
+    IEnumerator BoatTurn()
     {
-        while(true)
+        for(int i = 1; i <= 4; i++)
         {
-            yield return new WaitForSeconds(1f);
-            EndTurnClicked();
-            Debug.Log(currentTurn);
+            WeightStart?.Invoke(i);
+            yield return new WaitForSeconds(eachWeightTime);
         }
+        currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
     }
 }
