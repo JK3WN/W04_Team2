@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6577024535199433586}
   - component: {fileID: 1874763522506884873}
   m_Layer: 7
-  m_Name: Land Type 1
-  m_TagString: Land
+  m_Name: Land Type Reef 2
+  m_TagString: Reef
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4901961, g: 0.45098042, b: 0.6117647, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ba4d93debaae04496bb9cab16390fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landType: 1
+  landType: 2
 --- !u!61 &1874763522506884873
 BoxCollider2D:
   m_ObjectHideFlags: 0
