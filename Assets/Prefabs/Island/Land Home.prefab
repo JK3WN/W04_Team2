@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 241043062533173692}
   - component: {fileID: 3782660333202869127}
-  - component: {fileID: 6577024535199433586}
   - component: {fileID: 1874763522506884873}
-  m_Layer: 7
-  m_Name: Land Type 2
+  - component: {fileID: 5886961935629223381}
+  m_Layer: 0
+  m_Name: Land Home
   m_TagString: Land
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5907063, g: 0.9339623, b: 0.5594963, a: 1}
+  m_Color: {r: 0.8392157, g: 0.64958817, b: 0.59607846, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6577024535199433586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4011823209949404412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ba4d93debaae04496bb9cab16390fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  landType: 2
 --- !u!61 &1874763522506884873
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5886961935629223381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4011823209949404412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ba4d93debaae04496bb9cab16390fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landType: 3

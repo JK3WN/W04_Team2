@@ -6,6 +6,9 @@ public class RandomSpawnManager : MonoBehaviour
 {
     public List<GameObject> lands;
     public List<Vector2> spawnedPos;
+
+    public GameObject[] spawnedFirst;
+
     private bool canSpawn;
     private int spawnedCount;
     public int MaxspawnCount;
@@ -14,7 +17,15 @@ public class RandomSpawnManager : MonoBehaviour
     void Start()
     {
         spawnedCount = 0;
+        
         spawnedPos = new List<Vector2>();
+
+        spawnedFirst = GameObject.FindGameObjectsWithTag("Land");
+
+        for (int i = 0; i < spawnedFirst.Length; i++)
+        {
+            spawnedPos.Add(spawnedFirst[i].transform.position);
+        }
 
         while(spawnedCount < MaxspawnCount)
         {
