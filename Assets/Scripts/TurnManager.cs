@@ -21,6 +21,7 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         currentTurn = TurnList.P1;
+        //StartCoroutine("temp");
     }
 
     // Update is called once per frame
@@ -29,11 +30,26 @@ public class TurnManager : MonoBehaviour
         // YJK, currentTurn이 P1이나 P2일 때만 endTurnButton 활성화
         if((int)currentTurn % 2 == 0)
         {
-            endTurnButton.enabled = true;
+            endTurnButton.gameObject.SetActive(true);
         }
         else
         {
-            endTurnButton.enabled = false;
+            endTurnButton.gameObject.SetActive(false);
+        }
+    }
+
+    public void EndTurnClicked()
+    {
+        currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
+    }
+
+    IEnumerator temp()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1f);
+            EndTurnClicked();
+            Debug.Log(currentTurn);
         }
     }
 }
