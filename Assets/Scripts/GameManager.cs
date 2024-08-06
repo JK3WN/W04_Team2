@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int ActionPoints;
+
     [Header("Sea - Level")]
     public GameObject[] lands;
     public int seaLevel;

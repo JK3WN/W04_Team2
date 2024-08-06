@@ -16,7 +16,6 @@ public enum TurnList
 public class TurnManager : MonoBehaviour
 {
     public static TurnList currentTurn = TurnList.P1;
-    public static int ActionPoints = 10;
     public event Action<int> WeightStart;
 
     // YJK, UI 관련 오브젝트들
@@ -29,7 +28,7 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         currentTurn = TurnList.P1;
-        ActionPoints = 10;
+        GameManager.instance.ActionPoints = 10;
         ChangeTurnText(currentTurn);
     }
 
@@ -45,13 +44,13 @@ public class TurnManager : MonoBehaviour
         {
             endTurnButton.gameObject.SetActive(false);
         }
-        apText.text = "AP: " + ActionPoints.ToString();
+        apText.text = "AP: " + GameManager.instance.ActionPoints.ToString();
     }
 
     public void EndTurnClicked()
     {
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
-        ActionPoints = 10;
+        GameManager.instance.ActionPoints = 10;
         ChangeTurnText(currentTurn);
         StartCoroutine("BoatTurn");
     }
