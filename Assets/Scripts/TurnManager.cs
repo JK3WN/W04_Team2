@@ -75,14 +75,17 @@ public class TurnManager : MonoBehaviour
             case TurnList.P1:
                 turnText.text = "Player 1";
                 turnText.color = Color.blue;
+                apText.gameObject.SetActive(true);
                 break;
             case TurnList.P2:
                 turnText.text = "Player 2";
                 turnText.color = Color.red;
+                apText.gameObject.SetActive(true);
                 break;
             default:
                 turnText.text = "Wait";
                 turnText.color = Color.magenta;
+                apText.gameObject.SetActive(false);
                 break;
         }
     }
