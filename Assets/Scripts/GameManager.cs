@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Sea - Level")]
     public GameObject[] lands;
+    public GameObject[] reefs;
+    public List<GameObject> landsList;
     public int seaLevel;
 
     [Header("Sea - Wind")]
@@ -19,7 +21,6 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
@@ -30,6 +31,16 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         lands = GameObject.FindGameObjectsWithTag("Land");
+        reefs = GameObject.FindGameObjectsWithTag("Reef");
+
+        for (int i = 0; i < lands.Length; i++)
+        {
+            landsList.Add(lands[i]);
+        }
+        for (int i = 0; i < reefs.Length; i++)
+        {
+            landsList.Add(reefs[i]);
+        }
     }
 
     void Update()
@@ -58,45 +69,45 @@ public class GameManager : MonoBehaviour
     {
         if (seaLevel == 1)
         {
-            for (int i = 0; i < lands.Length; i++)
+            for (int i = 0; i < landsList.Count; i++)
             {
-                switch (lands[i].GetComponent<Lands>().landType)
+                switch (landsList[i].GetComponent<Lands>().landType)
                 {
                     case 1:
-                        lands[i].SetActive(true);
+                        landsList[i].SetActive(true);
                         break;
                     case 2:
-                        lands[i].SetActive(true);
+                        landsList[i].SetActive(true);
                         break;
                 }
             }
         }
         else if (seaLevel == 2)
         {
-            for (int i = 0; i < lands.Length; i++)
+            for (int i = 0; i < landsList.Count; i++)
             {
-                switch (lands[i].GetComponent<Lands>().landType)
+                switch (landsList[i].GetComponent<Lands>().landType)
                 {
                     case 1:
-                        lands[i].SetActive(false);
+                        landsList[i].SetActive(false);
                         break;
                     case 2:
-                        lands[i].SetActive(true);
+                        landsList[i].SetActive(true);
                         break;
                 }
             }
         }
         else
         {
-            for (int i = 0; i < lands.Length; i++)
+            for (int i = 0; i < landsList.Count; i++)
             {
-                switch (lands[i].GetComponent<Lands>().landType)
+                switch (landsList[i].GetComponent<Lands>().landType)
                 {
                     case 1:
-                        lands[i].SetActive(false);
+                        landsList[i].SetActive(false);
                         break;
                     case 2:
-                        lands[i].SetActive(false);
+                        landsList[i].SetActive(false);
                         break;
                 }
             }
