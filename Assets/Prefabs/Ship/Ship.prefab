@@ -111,6 +111,7 @@ MonoBehaviour:
   currentButton: {fileID: 0}
   hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
   hpUI: {fileID: 0}
+  hpText: {fileID: 0}
   turnManager: {fileID: 0}
 --- !u!70 &7024894571711622091
 CapsuleCollider2D:

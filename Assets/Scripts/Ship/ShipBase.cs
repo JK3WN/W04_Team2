@@ -32,6 +32,8 @@ public class ShipBase : MonoBehaviour
 
         turnManager = GameObject.Find("TurnManager").GetComponent<TurnManager>();
         if (turnManager != null) turnManager.WeightStart += OnWeightStart;
+
+        canvas = GameObject.FindWithTag("ShipUI").GetComponent<Canvas>();
         
         currentHP = weight;
         CreateHP();
