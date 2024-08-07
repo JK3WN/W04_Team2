@@ -11,7 +11,7 @@ public class BesideShip : ShipBase
 
         weight = 2;
         currentHP = weight;
-        attackDir = Vector2.down;
+        attackDir = Vector2.right;
         attackPositions.Add(position + attackDir);
         attackPositions.Add(position - attackDir);
     }
@@ -25,7 +25,7 @@ public class BesideShip : ShipBase
     public override void Rotate()
     {
         base.Rotate();
-        attackDir = -transform.up;
+        attackDir = transform.right;
     }
 
     public override void ResetAttackRange()

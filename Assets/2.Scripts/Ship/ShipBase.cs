@@ -61,21 +61,21 @@ public class ShipBase : MonoBehaviour
 
     private void OnWeightStart(int CallWeight)
     {
-        if (weight != CallWeight) return;
-        // YJK, 자기 weight와 동일한 event가 들어올 때만 진행
-        Attack();
         if (clicked)
         {
             clicked = false;
             transform.rotation = tempRotation;
             foreach (Transform child in transform)
             {
-                Destroy(child.gameObject);
+                if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
             }
             Destroy(currentButton);
             Destroy(currentCheckButton);
         }
-        Invoke("DeathCheck", 0.3f);
+        Invoke("DeathCheck", 0.1f);
+
+        if (weight == CallWeight) Attack();
+        
     }
 
     public virtual void Attack() // attack
@@ -129,7 +129,7 @@ public class ShipBase : MonoBehaviour
                 transform.rotation = tempRotation;
                 foreach (Transform child in transform)
                 {
-                    Destroy(child.gameObject);
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
                 }
                 Destroy(currentButton);
                 Destroy(currentCheckButton);
@@ -145,14 +145,12 @@ public class ShipBase : MonoBehaviour
                 ShowShipInfo();
             }
         }
-
-        
     }
     public virtual void ShowAttackRange()
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
         }
 
         for (int i = 0; i < attackPositions.Count; i++)
@@ -210,7 +208,14 @@ public class ShipBase : MonoBehaviour
 
     public virtual void ResetAttackRange()
     {
+    }
 
+    public virtual void RepositionUI()
+    {
+        position = transform.position; 
+        RectTransform hpUITransform = hpUI.GetComponent<RectTransform>();
+        hpUITransform.position = transform.position + new Vector3(0, -0.2f, 0);
+        ResetAttackRange();
     }
 
     public void ShowShipInfo()

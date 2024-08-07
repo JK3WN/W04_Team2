@@ -51,7 +51,7 @@ public class StraightShip : ShipBase
                 ResetAttackRange();
                 foreach (Transform child in transform)
                 {
-                    Destroy(child.gameObject);
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
                 }
                 Destroy(currentButton);
                 Destroy(currentCheckButton);
@@ -80,7 +80,7 @@ public class StraightShip : ShipBase
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
         }
 
         for (int i = 0; i < attackPositions.Count; i++)
@@ -90,8 +90,7 @@ public class StraightShip : ShipBase
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
             foreach (var collider in hitColliders)
             {
-                Debug.Log(collider.gameObject.name);
-                if (collider.gameObject.CompareTag("Ship")) break;
+                if (collider.gameObject.CompareTag("Ship")) return;
 
             }
         }

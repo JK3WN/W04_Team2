@@ -15,21 +15,42 @@ public class ShipWindMove : MonoBehaviour
     public Transform leftPos;
     public Transform rightPos;
 
+    private ShipBase ship;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (weight > 50)
+        ship = GetComponent<ShipBase>();
+        weight = ship.weight;
+
+        switch (weight)
         {
-            repeat = 1;
+            case 1:
+                repeat = 4;
+                break;
+            case 2:
+                repeat = 3;
+                break;
+            case 3:
+                repeat = 2;
+                break;
+            case 4:
+                repeat = 1;
+                break;
         }
-        else if (weight > 20)
-        {
-            repeat = 2;
-        }
-        else
-        {
-            repeat = 3;
-        }
+
+        //if (weight > 50)
+        //{
+        //    repeat = 1;
+        //}
+        //else if (weight > 20)
+        //{
+        //    repeat = 2;
+        //}
+        //else
+        //{
+        //    repeat = 3;
+        //}
     }
 
     // Update is called once per frame
@@ -42,6 +63,7 @@ public class ShipWindMove : MonoBehaviour
                 for (int i = 0; i < repeat; i++)
                 {
                     Move();
+                    ship.RepositionUI();
                 }
                 StartCoroutine(Delay());
             }
