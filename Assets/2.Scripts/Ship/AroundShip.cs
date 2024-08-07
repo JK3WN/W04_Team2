@@ -35,6 +35,7 @@ public class AroundShip : ShipBase
                 }
                 //Destroy(currentButton);
                 //Destroy(currentCheckButton);
+                ShipPanel.SetActive(false);
             }
             else
             {
@@ -42,6 +43,8 @@ public class AroundShip : ShipBase
                 tempRotation = transform.rotation;
                 ShowAttackRange();
                 //ShowButton();
+                ShipPanel.SetActive(true);
+                ShowShipInfo();
             }
         }
     }
