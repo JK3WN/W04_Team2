@@ -27,22 +27,13 @@ public class AroundShip : ShipBase
         {
             if (clicked)
             {
-                clicked = false;
-                transform.rotation = tempRotation;
-                foreach (Transform child in transform)
-                {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
-                //Destroy(currentButton);
-                //Destroy(currentCheckButton);
-                ShipPanel.SetActive(false);
+                clickOff();
             }
             else
             {
+                clickOff();
                 clicked = true;
-                tempRotation = transform.rotation;
                 ShowAttackRange();
-                //ShowButton();
                 ShipPanel.SetActive(true);
                 ShowShipInfo();
             }

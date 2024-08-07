@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6954501622135757133}
@@ -144,6 +144,13 @@ MonoBehaviour:
   checkButtonPrefab: {fileID: 1695171478318884752, guid: 584d31c5957c85745b92257801f9cbe9, type: 3}
   hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
   ShipPanel: {fileID: 0}
+  shipSpriteList:
+  - {fileID: 21300000, guid: 2606b04e694b11a4e846db59fbd6fb9d, type: 3}
+  - {fileID: 21300000, guid: fd3adb8554f7fe1438a87ddf49c14c03, type: 3}
+  - {fileID: 21300000, guid: 7816652c2c6d8d14597b8d17c8d28c24, type: 3}
+  - {fileID: 21300000, guid: bdcc38779e05c394d9edfe997acd3a6c, type: 3}
+  - {fileID: 21300000, guid: 82471f2b19466aa459b1b06b07c644e8, type: 3}
+  - {fileID: 21300000, guid: 7d1769c19000e2d4189de50984b00ba4, type: 3}
 --- !u!61 &7914358191774044524
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -105,6 +105,15 @@ MonoBehaviour:
   checkButtonPrefab: {fileID: 1695171478318884752, guid: 584d31c5957c85745b92257801f9cbe9, type: 3}
   hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
   ShipPanel: {fileID: 0}
+  shipSpriteList:
+  - {fileID: 21300000, guid: 96683373521cc2749894034c9fc81773, type: 3}
+  - {fileID: 21300000, guid: 0e71048ac494cf34db8a66d28760c5c6, type: 3}
+  - {fileID: 21300000, guid: 7e856730d74def848a6ad4a04c93802f, type: 3}
+  - {fileID: 21300000, guid: f705ea958a221f8459125c01f7e467ab, type: 3}
+  - {fileID: 21300000, guid: 5adf366dba5442043a8df50bd8f0e2ed, type: 3}
+  - {fileID: 21300000, guid: 38fc69b0c72dded4abc3347d7bb3dd0d, type: 3}
+  - {fileID: 21300000, guid: 4582693c9a2cd0640bf02f3ad24159b8, type: 3}
+  - {fileID: 21300000, guid: 584e3a66815e9d54fb9c1ed9e8b252eb, type: 3}
 --- !u!114 &7321145967699439714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +189,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3840677091500244702}
