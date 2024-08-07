@@ -31,6 +31,7 @@ public class BesideShip : ShipBase
     public override void ResetAttackRange()
     {
         base.ResetAttackRange();
+        attackDir = transform.right;
         attackPositions.Clear();
         attackPositions.Add(position + attackDir);
         attackPositions.Add(position - attackDir);

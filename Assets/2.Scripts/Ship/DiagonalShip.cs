@@ -24,12 +24,12 @@ public class DiagonalShip : ShipBase
     public override void Rotate()
     {
         base.Rotate();
-        attackDir = - transform.up + transform.right;
     }
 
     public override void ResetAttackRange()
     {
         base.ResetAttackRange();
+        attackDir = -transform.up + transform.right;
         attackPositions.Clear();
         attackPositions.Add(position + attackDir);
         attackPositions.Add(position - attackDir);

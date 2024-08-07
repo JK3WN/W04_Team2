@@ -60,6 +60,13 @@ MonoBehaviour:
   checkButtonPrefab: {fileID: 1695171478318884752, guid: 584d31c5957c85745b92257801f9cbe9, type: 3}
   hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
   ShipPanel: {fileID: 0}
+  shipSpriteList:
+  - {fileID: 21300000, guid: 3213f1b1521b5d34cb3737287bb28fa0, type: 3}
+  - {fileID: 21300000, guid: 9968bbe2eeab1c040be91b1cd029480f, type: 3}
+  - {fileID: 21300000, guid: 1c7f358d02841da49918dcc5cc4b9d55, type: 3}
+  - {fileID: 21300000, guid: 1b6e7b6203d7f944eaf2230dc084e842, type: 3}
+  - {fileID: 21300000, guid: 3e36ef62d52d5624f901e212957aea8b, type: 3}
+  - {fileID: 21300000, guid: 231e450352c67c041b28bd88d99aad13, type: 3}
 --- !u!61 &3293755226096883325
 BoxCollider2D:
   m_ObjectHideFlags: 0

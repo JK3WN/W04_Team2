@@ -21,32 +21,32 @@ public class AroundShip : ShipBase
         attackPositions.Add(position + Vector2.right + Vector2.up);
         attackPositions.Add(position + Vector2.left + Vector2.down);
     }
-    public override void OnMouseDown()
-    {
-        clickOff();
+    //public override void OnMouseDown()
+    //{
+    //    clickOff();
 
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            if (clicked)
-            {
-                clicked = false;
-                transform.rotation = tempRotation;
-                foreach (Transform child in transform)
-                {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
-                //Destroy(currentButton);
-                //Destroy(currentCheckButton);
-            }
-            else
-            {
-                clicked = true;
-                tempRotation = transform.rotation;
-                ShowAttackRange();
-                //ShowButton();
-            }
-        }
-    }
+    //    if (!EventSystem.current.IsPointerOverGameObject())
+    //    {
+    //        if (clicked)
+    //        {
+    //            clicked = false;
+    //            transform.rotation = tempRotation;
+    //            foreach (Transform child in transform)
+    //            {
+    //                if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+    //            }
+    //            //Destroy(currentButton);
+    //            //Destroy(currentCheckButton);
+    //        }
+    //        else
+    //        {
+    //            clicked = true;
+    //            tempRotation = transform.rotation;
+    //            ShowAttackRange();
+    //            //ShowButton();
+    //        }
+    //    }
+    //}
 
     public override void ResetAttackRange()
     {

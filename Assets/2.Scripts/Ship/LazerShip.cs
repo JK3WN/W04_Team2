@@ -38,32 +38,23 @@ public class LazerShip : ShipBase
 
     public override void OnMouseDown()
     {
-        clickOff();
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (clicked)
             {
-                clicked = false;
-                transform.rotation = tempRotation;
+                clickOff();
                 attackDir = -transform.up;
                 ResetAttackRange();
-                foreach (Transform child in transform)
-                {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
-                Destroy(currentButton);
-                Destroy(currentCheckButton);
             }
             else
             {
+                clickOff();
                 clicked = true;
                 tempRotation = transform.rotation;
                 ShowAttackRange();
                 ShowButton();
             }
         }
-
-
     }
 
     public override void Rotate()
