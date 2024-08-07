@@ -28,7 +28,7 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         currentTurn = TurnList.P1;
-        GameManager.instance.ActionPoints = 10;
+        GameManager.instance.ActionPoints = 2;
         ChangeTurnText(currentTurn);
         GameObject.Find("ShipPanel").SetActive(false);
     }
@@ -52,7 +52,7 @@ public class TurnManager : MonoBehaviour
     {
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
         if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
-        GameManager.instance.ActionPoints = 10;
+        GameManager.instance.ActionPoints = 2;
         ChangeTurnText(currentTurn);
         StartCoroutine("BoatTurn");
     }
