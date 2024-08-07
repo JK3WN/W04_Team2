@@ -141,13 +141,15 @@ public class ShipBase : MonoBehaviour
     {
         transform.Rotate(0, 0, 90);
         SetArrowButton();
+        if (tempRotation != transform.rotation) currentArrowButton.SetActive(false);
+        else currentArrowButton.SetActive(true);
     }
 
 
     public void Move()
     {
         canMove = true;
-
+        clickOff();
         // Use the ship's local downward direction
         Vector2 downDirection = transform.TransformDirection(Vector2.down);
         RaycastHit2D ray = Physics2D.Raycast(upPos.position, downDirection, 100f, mask);
@@ -288,6 +290,7 @@ public class ShipBase : MonoBehaviour
         position = transform.position; 
         RectTransform hpUITransform = hpUI.GetComponent<RectTransform>();
         hpUITransform.position = transform.position + new Vector3(0, -0.2f, 0);
+
         ResetAttackRange();
     }
 

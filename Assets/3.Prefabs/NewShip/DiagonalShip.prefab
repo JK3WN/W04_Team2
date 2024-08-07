@@ -138,17 +138,24 @@ MonoBehaviour:
   team: 2
   attackTilePrefab: {fileID: 5886958740152642960, guid: 80e3b404bf06bf44981c2d4dae68f9bc, type: 3}
   clicked: 0
+  tempRotation: {x: 0, y: 0, z: 0, w: 0}
   canvas: {fileID: 0}
   buttonPrefab: {fileID: 5997144669560076428, guid: 3deb29ca08899154591664e7768aef16, type: 3}
   currentButton: {fileID: 0}
   checkButtonPrefab: {fileID: 1695171478318884752, guid: 584d31c5957c85745b92257801f9cbe9, type: 3}
   hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
+  arrowButtonPrefab: {fileID: 8733665216609118779, guid: b111d1256c0672146a0544f9ab13b847, type: 3}
+  currentArrowButton: {fileID: 0}
   ShipPanel: {fileID: 0}
   shipSpriteList:
   - {fileID: 21300000, guid: aa28600e9a1ed534fa8b5d37c14d53a6, type: 3}
   - {fileID: 21300000, guid: 6efb8cfff23dd334fb15c3b984d43656, type: 3}
   - {fileID: 21300000, guid: d3792bf0d22fa5b4cad136d36976e9d6, type: 3}
   - {fileID: 21300000, guid: c7fc86b27dd4ffc4585e74916a78d71b, type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 160
+  upPos: {fileID: 7124077652696335667}
 --- !u!61 &2687259061477008659
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -206,15 +213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d80d03597955c49a660140f159508b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 30
-  repeat: 0
   mask:
     serializedVersion: 2
     m_Bits: 160
   upPos: {fileID: 6427658140521337278}
-  downPos: {fileID: 7124077652696335667}
-  leftPos: {fileID: 264787974730782671}
-  rightPos: {fileID: 4647677077483445332}
 --- !u!50 &8898319254876710214
 Rigidbody2D:
   serializedVersion: 4
@@ -311,16 +313,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf6236d7d423344788e25f5cabff8b7, type: 3}
---- !u!4 &264787974730782671 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5260136825922380780, guid: baf6236d7d423344788e25f5cabff8b7, type: 3}
-  m_PrefabInstance: {fileID: 5427811514097759267}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4647677077483445332 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 805203688345970807, guid: baf6236d7d423344788e25f5cabff8b7, type: 3}
-  m_PrefabInstance: {fileID: 5427811514097759267}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5279213434132104549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 148897469600133446, guid: baf6236d7d423344788e25f5cabff8b7, type: 3}
