@@ -23,8 +23,8 @@ public class ShipClickMove : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     transform.position = player.GetComponent<Player>().intPosition;
-                    isSelected = false;
-                    player.GetComponent<Player>().selectedShip = null;
+                    //isSelected = false;
+                    //player.GetComponent<Player>().selectedShip = null;
 
                 }
             }
