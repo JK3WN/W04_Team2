@@ -54,7 +54,7 @@ public class DiagonalShip : ShipBase
                 clicked = true;
                 tempRotation = transform.rotation;
                 ShowAttackRange();
-                if (TurnManager.currentTurn == team) ShowButton();
+                if (TurnManager.currentTurn == team && GameManager.instance.ActionPoints > 0) ShowButton();
             }
         }
     }

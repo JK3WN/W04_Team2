@@ -153,6 +153,7 @@ public class ShipBase : MonoBehaviour
     public void Move()
     {
         canMove = true;
+        GameManager.instance.ActionPoints -= 1;
         clickOff();
         // Use the ship's local downward direction
         Vector2 downDirection = transform.TransformDirection(Vector2.down);
@@ -206,7 +207,7 @@ public class ShipBase : MonoBehaviour
                 clicked = true;
                 tempRotation = transform.rotation;
                 ShowAttackRange();
-                if (TurnManager.currentTurn == team) ShowButton();
+                if (TurnManager.currentTurn == team && GameManager.instance.ActionPoints > 0) ShowButton();
                 ShipPanel.SetActive(true);
                 ShowShipInfo();
             }
