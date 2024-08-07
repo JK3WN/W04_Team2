@@ -87,6 +87,7 @@ public class ShipBase : MonoBehaviour
             }
             Destroy(currentButton);
             Destroy(currentCheckButton);
+            Destroy(currentArrowButton);
         }
         Invoke("DeathCheck", 0.1f);
 
