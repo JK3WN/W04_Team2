@@ -25,6 +25,7 @@ public class TurnManager : MonoBehaviour
     public GameObject[] NavyVessel, PirateVessel;
     public GameObject VictoryPanel;
     public TMPro.TextMeshProUGUI VictoryText;
+    public Sprite NavyImage, PirateImage;
 
     public float eachWeightTime = 5.0f;
 
@@ -89,6 +90,7 @@ public class TurnManager : MonoBehaviour
             {
                 VictoryText.text = "Pirates Victory!";
                 VictoryText.color = Color.red;
+                VictoryPanel.GetComponent<Image>().sprite = PirateImage;
                 VictoryPanel.SetActive(true);
             }
         }
@@ -98,6 +100,7 @@ public class TurnManager : MonoBehaviour
             {
                 VictoryText.text = "Navy Victory!";
                 VictoryText.color = Color.blue;
+                VictoryPanel.GetComponent<Image>().sprite = NavyImage;
                 VictoryPanel.SetActive(true);
             }
         }
