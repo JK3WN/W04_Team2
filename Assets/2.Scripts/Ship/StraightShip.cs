@@ -56,7 +56,7 @@ public class StraightShip : ShipBase
                 clicked = true;
                 tempRotation = transform.rotation;
                 ShowAttackRange();
-                ShowButton();
+                if (TurnManager.currentTurn == team) ShowButton();
             }
         }
     }
