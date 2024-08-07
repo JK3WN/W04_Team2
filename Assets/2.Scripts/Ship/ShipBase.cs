@@ -11,6 +11,7 @@ public class ShipBase : MonoBehaviour
 {
     public int weight;
     public int currentHP;
+    public int actionPoint;
     public TurnList team;
 
     protected Vector2 position;
@@ -67,6 +68,7 @@ public class ShipBase : MonoBehaviour
         canvas = GameObject.FindWithTag("ShipUI").GetComponent<Canvas>();
         
         currentHP = weight;
+        actionPoint = 2;
         CreateHP();
     }
 
@@ -77,23 +79,14 @@ public class ShipBase : MonoBehaviour
 
     private void OnWeightStart(int CallWeight)
     {
-        if (clicked)
-        {
-            clicked = false;
-            transform.rotation = tempRotation;
-            foreach (Transform child in transform)
-            {
-                if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-            }
-            Destroy(currentButton);
-            Destroy(currentCheckButton);
-            Destroy(currentArrowButton);
-        }
+        clickOff();
+        ResetAttackRange();
         Invoke("DeathCheck", 0.1f);
 
         //if (weight == CallWeight) Attack();
+
         Attack();
-        
+        actionPoint = 2;
     }
 
     public virtual void Attack() // attack
@@ -160,7 +153,7 @@ public class ShipBase : MonoBehaviour
     public void Move()
     {
         canMove = true;
-        GameManager.instance.ActionPoints -= 1;
+        actionPoint -= 1;
         clickOff();
         // Use the ship's local downward direction
         Vector2 downDirection = transform.TransformDirection(Vector2.down);
@@ -220,9 +213,8 @@ public class ShipBase : MonoBehaviour
             {
                 clickOff();
                 clicked = true;
-                tempRotation = transform.rotation;
                 ShowAttackRange();
-                if (TurnManager.currentTurn == team && GameManager.instance.ActionPoints > 0) ShowButton();
+                if (TurnManager.currentTurn == team && actionPoint > 0) ShowButton();
                 ShipPanel.SetActive(true);
                 ShowShipInfo();
             }
@@ -319,7 +311,7 @@ public class ShipBase : MonoBehaviour
         ShipPanel.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = name;
         ShipPanel.transform.Find("ShipImage").GetComponent<Image>().sprite = this.transform.Find("GameObject").GetComponent<SpriteRenderer>().sprite;
         ShipPanel.transform.Find("ShipImage").GetComponent<Image>().SetNativeSize();
-        ShipPanel.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = currentHP + " / 3";
+        ShipPanel.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = currentHP + " / 3\n" + actionPoint + " / 2";
     }
 
     public void clickOff()
@@ -331,6 +323,7 @@ public class ShipBase : MonoBehaviour
             {
                 obj.clicked = false;
                 obj.transform.rotation = obj.tempRotation;
+                obj.ReAssignAttackDir();
                 foreach (Transform child in obj.transform)
                 {
                     if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
@@ -341,5 +334,10 @@ public class ShipBase : MonoBehaviour
                 obj.ShipPanel.SetActive(false);
             }
         }
+    }
+
+    public virtual void ReAssignAttackDir()
+    {
+
     }
 }

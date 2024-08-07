@@ -16,8 +16,7 @@ public class CheckButton : MonoBehaviour
     {
         if(ship.tempRotation != ship.transform.rotation)
         {
-            if (TurnManager.currentTurn == ship.team) GameManager.instance.ActionPoints -= 1;
-            else GameManager.instance.ActionPoints -= 3;
+            ship.actionPoint -= 1;
         }
 
         ship.clicked = false;

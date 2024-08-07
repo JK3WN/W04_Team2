@@ -47,24 +47,21 @@ public class DiagonalShip : ShipBase
 
     public override void OnMouseDown()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (clicked)
         {
-            if (clicked)
-            {
-                clickOff();
-                attackDir = -transform.up + transform.right;
-                ResetAttackRange();
-            }
-            else
-            {
-                clickOff();
-                clicked = true;
-                tempRotation = transform.rotation;
-                ShowAttackRange();
-                if (TurnManager.currentTurn == team && GameManager.instance.ActionPoints > 0) ShowButton();
-                ShipPanel.SetActive(true);
-                ShowShipInfo();
-            }
+            clickOff();
+            attackDir = -transform.up + transform.right;
+            ResetAttackRange();
+        }
+        else
+        {
+            clickOff();
+            clicked = true;
+            tempRotation = transform.rotation;
+            ShowAttackRange();
+            if (TurnManager.currentTurn == team && actionPoint > 0) ShowButton();
+            ShipPanel.SetActive(true);
+            ShowShipInfo();
         }
     }
 
@@ -105,5 +102,11 @@ public class DiagonalShip : ShipBase
             if ((position + attackDir * i).x < -5 || (position + attackDir * i).x > 5 || (position + attackDir * i).y < -5 || (position + attackDir * i).y > 5) break;
             attackPositions.Add(position + attackDir * i);
         }
+    }
+
+    public override void ReAssignAttackDir()
+    {
+        base.ReAssignAttackDir();
+        attackDir = -transform.up + transform.right;
     }
 }
