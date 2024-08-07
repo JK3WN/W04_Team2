@@ -154,6 +154,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2bdbf059fa7a8a041a08e5a36695c434, type: 3}
   - {fileID: 21300000, guid: e8da2edb2fe757a4f8c540f1a9c9e0ba, type: 3}
   - {fileID: 21300000, guid: a88423ea1ecdd7046a225f512d705c69, type: 3}
+  boomPrefab: {fileID: 8204197191904901414, guid: ace17959f94ed3740901035c2755608c, type: 3}
   mask:
     serializedVersion: 2
     m_Bits: 160
