@@ -71,7 +71,10 @@ public class GameManager : MonoBehaviour
         }
         */
         //ToFirstPosition();
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
