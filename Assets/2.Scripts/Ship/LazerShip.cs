@@ -38,6 +38,7 @@ public class LazerShip : ShipBase
 
     public override void OnMouseDown()
     {
+        clickOff();
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (clicked)

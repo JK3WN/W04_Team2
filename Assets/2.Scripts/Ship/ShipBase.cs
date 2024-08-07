@@ -123,6 +123,8 @@ public class ShipBase : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            clickOff();
+
             if (clicked)
             {
                 clicked = false;
@@ -224,5 +226,25 @@ public class ShipBase : MonoBehaviour
         ShipPanel.transform.Find("ShipImage").GetComponent<Image>().sprite = this.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         ShipPanel.transform.Find("ShipImage").GetComponent<Image>().SetNativeSize();
         ShipPanel.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = currentHP + " / " + weight + "\n" + (5 - weight);
+    }
+
+    public void clickOff()
+    {
+        ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+        foreach (ShipBase obj in foundObjects)
+        {
+            if (obj.clicked)
+            {
+                obj.clicked = false;
+                obj.transform.rotation = obj.tempRotation;
+                foreach (Transform child in obj.transform)
+                {
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+                }
+                Destroy(obj.currentButton);
+                Destroy(obj.currentCheckButton);
+                obj.ShipPanel.SetActive(false);
+            }
+        }
     }
 }

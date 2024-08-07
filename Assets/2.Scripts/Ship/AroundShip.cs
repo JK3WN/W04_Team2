@@ -23,6 +23,8 @@ public class AroundShip : ShipBase
     }
     public override void OnMouseDown()
     {
+        clickOff();
+
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (clicked)
