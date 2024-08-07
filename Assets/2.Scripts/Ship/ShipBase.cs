@@ -174,16 +174,22 @@ public class ShipBase : MonoBehaviour
                 // Draw the current position to the target position
                 Debug.DrawLine(upPos.position, rays.point, Color.green);
 
+                float length = Mathf.Round(Vector2.Distance(transform.position, rays.point));
+
                 if (rays.collider.CompareTag("Dirt"))
                 {
-                    if (Vector2.Distance(transform.position, rays.collider.transform.position) < 0.05f)
+                    if (Mathf.Round(Vector2.Distance(transform.position, rays.point)) == 0)
                     {
                         canMove = false;
+                        transform.position = new Vector2(Mathf.Floor(transform.position.x) + 0.5f, Mathf.Floor(transform.position.y) + 0.5f);
+                        break;
                     }
                 }
-                else if (!rays.collider.CompareTag("Dirt") && Vector2.Distance(upPos.position, rays.point) < 0.05f)
+                else if (!rays.collider.CompareTag("Dirt") && Mathf.Round(Vector2.Distance(transform.position, rays.point)) == 0)
                 {
                     canMove = false;
+                    transform.position = new Vector2(Mathf.Floor(transform.position.x) + 0.5f, Mathf.Floor(transform.position.y) + 0.5f);
+                    break;
                 }
 
                 transform.Translate(Vector2.down * 10 * Time.deltaTime);
