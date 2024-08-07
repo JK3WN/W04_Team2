@@ -121,7 +121,7 @@ MonoBehaviour:
   repeat: 0
   mask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 160
   upPos: {fileID: 7266093679772670518}
   downPos: {fileID: 6861293762771947195}
   leftPos: {fileID: 4488206399393504327}
