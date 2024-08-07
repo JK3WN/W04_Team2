@@ -153,7 +153,7 @@ public class ShipBase : MonoBehaviour
                 clicked = true;
                 tempRotation = transform.rotation;
                 ShowAttackRange();
-                ShowButton();
+                if (TurnManager.currentTurn == team) ShowButton();
                 ShipPanel.SetActive(true);
                 ShowShipInfo();
             }
