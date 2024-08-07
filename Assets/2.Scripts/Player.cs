@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Vector2 intPosition;
+    public GameObject selectedShip;
+    public RaycastHit2D hit;
+
+    public LayerMask hitLayerMask;
+
     void Update()
     {
         // 마우스 클릭 감지
@@ -13,14 +19,29 @@ public class Player : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             // 클릭 위치를 int형으로 변환 (소수점 이하 자르기)
-            Vector2 intPosition = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
+            intPosition = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
 
-            // 또는 반올림할 경우
-            // Vector2Int intPosition = new Vector2Int(Mathf.RoundToInt(mousePosition.x), Mathf.RoundToInt(mousePosition.y));
+            hit = Physics2D.Raycast(intPosition, Vector2.zero, Mathf.Infinity, hitLayerMask);
 
+            if (hit.collider != null)
+            {
+                if (hit.collider.CompareTag("Ship"))
+                {
+                    selectedShip = hit.collider.gameObject;
+                    selectedShip.GetComponent<ShipClickMove>().isSelected = true;
+                }
+            }
 
             // 클릭한 위치의 월드 좌표를 출력
-            Debug.Log("Clicked Position: " + intPosition);
+            //Debug.Log("Clicked Position: " + intPosition);
+
+            StartCoroutine(Zero());
         }
+    }
+
+    IEnumerator Zero()
+    {
+        yield return new WaitForSeconds(0.5f);
+        intPosition = new Vector2 (0, 0);
     }
 }

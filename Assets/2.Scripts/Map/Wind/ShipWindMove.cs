@@ -56,7 +56,6 @@ public class ShipWindMove : MonoBehaviour
             RaycastHit2D ray = Physics2D.Raycast(rightPos.position, Vector2.right, 0.5f, mask);
             if(ray.collider == null)
             {
-                Debug.Log("Not Hit");
                 transform.position = new Vector2(transform.position.x + 1, transform.position.y);
             }
         }
@@ -65,7 +64,6 @@ public class ShipWindMove : MonoBehaviour
             RaycastHit2D ray = Physics2D.Raycast(leftPos.position, Vector2.left, 0.5f, mask);
             if (ray.collider == null)
             {
-                Debug.Log("Not Hit");
                 transform.position = new Vector2(transform.position.x - 1, transform.position.y);
             }
         }
@@ -74,7 +72,6 @@ public class ShipWindMove : MonoBehaviour
             RaycastHit2D ray = Physics2D.Raycast(upPos.position, Vector2.up, 0.5f, mask);
             if (ray.collider == null)
             {
-                Debug.Log("Not Hit");
                 transform.position = new Vector2(transform.position.x, transform.position.y + 1);
             }
         }
@@ -83,7 +80,6 @@ public class ShipWindMove : MonoBehaviour
             RaycastHit2D ray = Physics2D.Raycast(downPos.position, Vector2.down, 0.5f, mask);
             if (ray.collider == null)
             {
-                Debug.Log("Not Hit");
                 transform.position = new Vector2(transform.position.x, transform.position.y - 1);
             }
         }
