@@ -9,7 +9,7 @@ public class DiagonalShip : ShipBase
     public override void Start()
     {
         base.Start();
-        weight = 2;
+        weight = 3;
         currentHP = weight;
         attackDir = -transform.up + transform.right;
         for (int i = 1; i < 10; i++)
