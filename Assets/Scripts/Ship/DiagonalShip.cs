@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicShip : ShipBase
+public class DiagonalShip : ShipBase
 {
     public override void Start()
     {
         base.Start();
 
-        weight = 1;
+        weight = 2;
         currentHP = weight;
-        attackDir = Vector2.down;
+        attackDir = Vector2.down + Vector2.right;
         attackPositions.Add(position + attackDir);
+        attackPositions.Add(position - attackDir);
     }
 
     public override void Attack()
@@ -23,7 +24,7 @@ public class BasicShip : ShipBase
     public override void Rotate()
     {
         base.Rotate();
-        attackDir = -transform.up;
+        attackDir = - transform.up + transform.right;
     }
 
     public override void ResetAttackRange()
@@ -31,5 +32,6 @@ public class BasicShip : ShipBase
         base.ResetAttackRange();
         attackPositions.Clear();
         attackPositions.Add(position + attackDir);
+        attackPositions.Add(position - attackDir);
     }
 }
