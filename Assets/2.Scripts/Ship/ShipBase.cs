@@ -38,6 +38,8 @@ public class ShipBase : MonoBehaviour
     public List<Sprite> shipSpriteList;
     protected SpriteRenderer shipSprite;
 
+    public GameObject boomPrefab;
+
     //public ShipManager shipManager;
 
     public LayerMask mask;
@@ -97,6 +99,7 @@ public class ShipBase : MonoBehaviour
     {
         for (int i = 0; i < attackPositions.Count; i++)
         {
+            Instantiate(boomPrefab, attackPositions[i], Quaternion.identity);
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
             foreach (var collider in hitColliders)
             {
