@@ -49,7 +49,7 @@ public class TurnManager : MonoBehaviour
         {
             endTurnButton.gameObject.SetActive(false);
         }
-        apText.text = "AP: " + GameManager.instance.ActionPoints.ToString();
+        apText.text = "Ground: " + GameManager.instance.ActionPoints.ToString();
     }
 
     public void EndTurnClicked()

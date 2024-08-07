@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 60
   m_Sprite: {fileID: 21300000, guid: ab972631698b1844c8509c1b25c56cc4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.03125, y: 1.765625}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5236113868144044278}
-  - component: {fileID: 3893866658252360599}
+  - component: {fileID: 1422250668652220474}
   - component: {fileID: 5521866447446581885}
   - component: {fileID: 6456750404015970015}
   - component: {fileID: 4195312419777856283}
@@ -121,7 +121,7 @@ Transform:
   - {fileID: 3177660001466652275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3893866658252360599
+--- !u!114 &1422250668652220474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,11 +130,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4068046935258763310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45ddc91b9fe9f34b9a4fa232ebff70e, type: 3}
+  m_Script: {fileID: 11500000, guid: ea4dada4f1f25ac44968136ba5a3098c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 3
   currentHP: 3
+  actionPoint: 0
   team: 0
   attackTilePrefab: {fileID: 5886958740152642960, guid: 80e3b404bf06bf44981c2d4dae68f9bc, type: 3}
   clicked: 0
