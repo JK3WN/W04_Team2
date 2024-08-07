@@ -7,6 +7,9 @@ public class RandomSpawnManager : MonoBehaviour
     public List<GameObject> lands;
     public List<Vector2> spawnedPos;
 
+    public GameObject heightOne;
+    public GameObject heightTwo;
+
     public GameObject[] spawnedFirst;
 
     private bool canSpawn;
@@ -16,7 +19,6 @@ public class RandomSpawnManager : MonoBehaviour
 
     void Start()
     {
-        spawnedCount = 0;
         
         spawnedPos = new List<Vector2>();
 
@@ -27,9 +29,10 @@ public class RandomSpawnManager : MonoBehaviour
             spawnedPos.Add(spawnedFirst[i].transform.position);
         }
 
-        while(spawnedCount < MaxspawnCount)
+        spawnedCount = 0;
+        while (spawnedCount < MaxspawnCount)
         {
-            Vector2 SpawnPosVector = new Vector2 (Random.Range(-4, 4) + 0.5f, Random.Range(-4, 4) + 0.5f);
+            Vector2 SpawnPosVector = new Vector2 (Random.Range(0, 4) + 0.5f, Random.Range(-4, 4) + 0.5f);
             if(spawnedPos.Count != 0)
             {
                 canSpawn = true;
@@ -54,6 +57,36 @@ public class RandomSpawnManager : MonoBehaviour
                 spawnedPos.Add(SpawnPosVector);
             }
         }
+
+        spawnedCount = 0;
+        while (spawnedCount < MaxspawnCount)
+        {
+            Vector2 SpawnPosVector = new Vector2(Random.Range(-4, 0) + 0.5f, Random.Range(-4, 4) + 0.5f);
+            if (spawnedPos.Count != 0)
+            {
+                canSpawn = true;
+                for (int j = 0; j < spawnedPos.Count; j++)
+                {
+                    if (Vector2.Distance(spawnedPos[j], SpawnPosVector) < 1)
+                    {
+                        canSpawn = false;
+                    }
+                }
+                if (canSpawn)
+                {
+                    Instantiate(lands[Random.Range(0, lands.Count)], SpawnPosVector, Quaternion.Euler(0, 0, 0));
+                    spawnedCount++;
+                    spawnedPos.Add(SpawnPosVector);
+                }
+            }
+            else
+            {
+                Instantiate(lands[Random.Range(0, lands.Count)], SpawnPosVector, Quaternion.Euler(0, 0, 0));
+                spawnedCount++;
+                spawnedPos.Add(SpawnPosVector);
+            }
+        }
+
     }
 
 }

@@ -76,10 +76,18 @@ public class GameManager : MonoBehaviour
                 switch (landsList[i].GetComponent<Lands>().landType)
                 {
                     case 1:
-                        landsList[i].SetActive(true);
+                        if (!landsList[i].GetComponent<SpriteRenderer>().enabled)
+                        {
+                            landsList[i].GetComponent<SpriteRenderer>().enabled = !landsList[i].GetComponent<SpriteRenderer>().enabled;
+                            landsList[i].GetComponent<BoxCollider2D>().enabled = !landsList[i].GetComponent<BoxCollider2D>().enabled;
+                        }
                         break;
                     case 2:
-                        landsList[i].SetActive(true);
+                        if (!landsList[i].GetComponent<SpriteRenderer>().enabled)
+                        {
+                            landsList[i].GetComponent<SpriteRenderer>().enabled = !landsList[i].GetComponent<SpriteRenderer>().enabled;
+                            landsList[i].GetComponent<BoxCollider2D>().enabled = !landsList[i].GetComponent<BoxCollider2D>().enabled;
+                        }
                         break;
                 }
             }
@@ -91,10 +99,18 @@ public class GameManager : MonoBehaviour
                 switch (landsList[i].GetComponent<Lands>().landType)
                 {
                     case 1:
-                        landsList[i].SetActive(false);
+                        if (landsList[i].GetComponent<SpriteRenderer>().enabled)
+                        {
+                            landsList[i].GetComponent<SpriteRenderer>().enabled = !landsList[i].GetComponent<SpriteRenderer>().enabled;
+                            landsList[i].GetComponent<BoxCollider2D>().enabled = !landsList[i].GetComponent<BoxCollider2D>().enabled;
+                        }
                         break;
                     case 2:
-                        landsList[i].SetActive(true);
+                        if (!landsList[i].GetComponent<SpriteRenderer>().enabled)
+                        {
+                            landsList[i].GetComponent<SpriteRenderer>().enabled = !landsList[i].GetComponent<SpriteRenderer>().enabled;
+                            landsList[i].GetComponent<BoxCollider2D>().enabled = !landsList[i].GetComponent<BoxCollider2D>().enabled;
+                        }
                         break;
                 }
             }
@@ -106,10 +122,18 @@ public class GameManager : MonoBehaviour
                 switch (landsList[i].GetComponent<Lands>().landType)
                 {
                     case 1:
-                        landsList[i].SetActive(false);
+                        if (landsList[i].GetComponent<SpriteRenderer>().enabled)
+                        {
+                            landsList[i].GetComponent<SpriteRenderer>().enabled = !landsList[i].GetComponent<SpriteRenderer>().enabled;
+                            landsList[i].GetComponent<BoxCollider2D>().enabled = !landsList[i].GetComponent<BoxCollider2D>().enabled;
+                        }
                         break;
                     case 2:
-                        landsList[i].SetActive(false);
+                        if (landsList[i].GetComponent<SpriteRenderer>().enabled)
+                        {
+                            landsList[i].GetComponent<SpriteRenderer>().enabled = !landsList[i].GetComponent<SpriteRenderer>().enabled;
+                            landsList[i].GetComponent<BoxCollider2D>().enabled = !landsList[i].GetComponent<BoxCollider2D>().enabled;
+                        }
                         break;
                 }
             }
