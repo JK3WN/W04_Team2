@@ -99,6 +99,7 @@ public class ShipBase : MonoBehaviour
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
             foreach (var collider in hitColliders)
             {
+                Debug.Log(collider);
                 if (collider.gameObject.CompareTag("Ship"))
                 {
                     collider.gameObject.GetComponent<ShipBase>().Damaged(1);

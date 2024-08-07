@@ -24,7 +24,6 @@ public class PlaceIsland : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             intPos = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
             hit = Physics2D.Raycast(intPos, Vector2.zero, Mathf.Infinity);
-            Debug.Log(hit.collider);
             if (mousePosition.x > -5 && mousePosition.x < 5 && mousePosition.y > -5 && mousePosition.y < 5 && (hit.collider == null || (hit.collider != null && !hit.collider.CompareTag("Ship") && !hit.collider.CompareTag("Land"))))
             {
                 islandPreview.SetActive(true);
@@ -33,6 +32,11 @@ public class PlaceIsland : MonoBehaviour
                 {
                     islandReady = false;
                     GameManager.instance.ActionPoints--;
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(intPos, Vector2.zero, Mathf.Infinity);
+                    foreach(RaycastHit2D hitt in hits)
+                    {
+                        if (hitt.collider.CompareTag("Dirt")) Destroy(hitt.collider.gameObject);
+                    }
                     GameObject islandInstance = GameObject.Instantiate(island, intPos, Quaternion.identity);
                 }
             }
