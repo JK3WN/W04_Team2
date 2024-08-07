@@ -48,7 +48,7 @@ public class LazerShip : ShipBase
                 ResetAttackRange();
                 foreach (Transform child in transform)
                 {
-                    Destroy(child.gameObject);
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
                 }
                 Destroy(currentButton);
                 Destroy(currentCheckButton);
@@ -77,7 +77,7 @@ public class LazerShip : ShipBase
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
         }
 
         for (int i = 0; i < attackPositions.Count; i++)

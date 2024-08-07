@@ -31,7 +31,7 @@ public class AroundShip : ShipBase
                 transform.rotation = tempRotation;
                 foreach (Transform child in transform)
                 {
-                    Destroy(child.gameObject);
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
                 }
                 //Destroy(currentButton);
                 //Destroy(currentCheckButton);
@@ -44,5 +44,19 @@ public class AroundShip : ShipBase
                 //ShowButton();
             }
         }
+    }
+
+    public override void ResetAttackRange()
+    {
+        base.ResetAttackRange();
+        attackPositions.Clear();
+        attackPositions.Add(position + Vector2.down);
+        attackPositions.Add(position + Vector2.up);
+        attackPositions.Add(position + Vector2.right);
+        attackPositions.Add(position + Vector2.left);
+        attackPositions.Add(position + Vector2.down + Vector2.right);
+        attackPositions.Add(position + Vector2.up + Vector2.left);
+        attackPositions.Add(position + Vector2.right + Vector2.up);
+        attackPositions.Add(position + Vector2.left + Vector2.down);
     }
 }

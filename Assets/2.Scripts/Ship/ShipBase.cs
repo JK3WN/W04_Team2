@@ -58,7 +58,7 @@ public class ShipBase : MonoBehaviour
             transform.rotation = tempRotation;
             foreach (Transform child in transform)
             {
-                Destroy(child.gameObject);
+                if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
             }
             Destroy(currentButton);
             Destroy(currentCheckButton);
@@ -120,7 +120,7 @@ public class ShipBase : MonoBehaviour
                 transform.rotation = tempRotation;
                 foreach (Transform child in transform)
                 {
-                    Destroy(child.gameObject);
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
                 }
                 Destroy(currentButton);
                 Destroy(currentCheckButton);
@@ -138,7 +138,7 @@ public class ShipBase : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
         }
 
         for (int i = 0; i < attackPositions.Count; i++)
@@ -196,6 +196,13 @@ public class ShipBase : MonoBehaviour
 
     public virtual void ResetAttackRange()
     {
+    }
 
+    public virtual void RepositionUI()
+    {
+        position = transform.position; 
+        RectTransform hpUITransform = hpUI.GetComponent<RectTransform>();
+        hpUITransform.position = transform.position + new Vector3(0, -0.2f, 0);
+        ResetAttackRange();
     }
 }
