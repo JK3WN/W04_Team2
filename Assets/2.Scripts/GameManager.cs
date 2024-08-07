@@ -61,10 +61,10 @@ public class GameManager : MonoBehaviour
         }
 
         SeaLevel();
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             ActionPoints--;
-            WindDirection();
+            //WindDirection();
             WindMove();
         }
         ToFirstPosition();

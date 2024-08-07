@@ -15,5 +15,7 @@ public class ArrowButton : MonoBehaviour
     public void OnButtonClick()
     {
         // 이동 코드
+        ship.Move();
+        //this.GetComponent<ShipWindMove>().Move();
     }
 }

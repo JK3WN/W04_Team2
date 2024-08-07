@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class ShipWindMove : MonoBehaviour
 {
-    public float weight;
-    public float repeat;
     public LayerMask mask;
-    public Vector2 windPos;
 
     public Transform upPos;
-    public Transform downPos;
-    public Transform leftPos;
-    public Transform rightPos;
+    private bool canMove;
 
     private ShipBase ship;
 
@@ -20,92 +15,47 @@ public class ShipWindMove : MonoBehaviour
     void Start()
     {
         ship = GetComponent<ShipBase>();
-        weight = ship.weight;
-
-        switch (weight)
-        {
-            case 1:
-                repeat = 4;
-                break;
-            case 2:
-                repeat = 3;
-                break;
-            case 3:
-                repeat = 2;
-                break;
-            case 4:
-                repeat = 1;
-                break;
-        }
-
     }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (GameManager.instance.isWind)
-        {
-            windPos = transform.position;
-            for (int i = 0; i < repeat; i++)
-            {
-                ship.RepositionUI();
-            }
-
-        }
-    }
-
 
     public void Move()
     {
-        for(int i = 0; i < repeat; i++)
-        {
-            if (GameManager.instance.windDIrection.x > 0)
-            {
-                RaycastHit2D ray = Physics2D.Raycast(rightPos.position, Vector2.right, 0.5f, mask);
-                if (ray.collider == null)
-                {
-                    transform.position = new Vector2(transform.position.x + 1, transform.position.y);
-                }
-            }
-            else if (GameManager.instance.windDIrection.x < 0)
-            {
-                RaycastHit2D ray = Physics2D.Raycast(leftPos.position, Vector2.left, 0.5f, mask);
-                if (ray.collider == null)
-                {
-                    transform.position = new Vector2(transform.position.x - 1, transform.position.y);
-                }
-            }
-            else if (GameManager.instance.windDIrection.y > 0)
-            {
-                RaycastHit2D ray = Physics2D.Raycast(upPos.position, Vector2.up, 0.5f, mask);
-                if (ray.collider == null)
-                {
-                    transform.position = new Vector2(transform.position.x, transform.position.y + 1);
-                }
-            }
-            else if (GameManager.instance.windDIrection.y < 0)
-            {
-                RaycastHit2D ray = Physics2D.Raycast(downPos.position, Vector2.down, 0.5f, mask);
-                if (ray.collider == null)
-                {
-                    transform.position = new Vector2(transform.position.x, transform.position.y - 1);
-                }
-            }
+        canMove = true;
 
-        }
+        // Use the ship's local downward direction
+        Vector2 downDirection = transform.TransformDirection(Vector2.down);
+        RaycastHit2D ray = Physics2D.Raycast(upPos.position, downDirection, 100f, mask);
 
-        ship.RepositionUI();
+        // Draw the ray in the scene view for debugging
+        Debug.DrawLine(upPos.position, upPos.position + (Vector3)downDirection * 100f, Color.red, 2f);
+
+        StartCoroutine(MoveToPos(ray));
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator MoveToPos(RaycastHit2D rays)
     {
-        if (collision.gameObject.CompareTag("Reef"))
+        while (canMove)
         {
-            Destroy(gameObject);
+            yield return null;
+            if (rays.collider != null)
+            {
+                // Draw the current position to the target position
+                Debug.DrawLine(upPos.position, rays.point, Color.green);
 
+                if (rays.collider.CompareTag("Dirt"))
+                {
+                    if (Vector2.Distance(transform.position, rays.collider.transform.position) < 0.05f)
+                    {
+                        canMove = false;
+                    }
+                }
+                else if (!rays.collider.CompareTag("Dirt") && Vector2.Distance(upPos.position, rays.point) < 0.05f)
+                {
+                    canMove = false;
+                }
+
+                transform.Translate(Vector2.down * 10 * Time.deltaTime);
+                ship.RepositionUI();
+            }
         }
     }
-
-
 }
