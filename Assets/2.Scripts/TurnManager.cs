@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum TurnList
 {
@@ -20,6 +21,10 @@ public class TurnManager : MonoBehaviour
     // YJK, UI 관련 오브젝트들
     public Button endTurnButton;
     public TMPro.TextMeshProUGUI turnText, apText;
+
+    public GameObject[] NavyVessel, PirateVessel;
+    public GameObject VictoryPanel;
+    public TMPro.TextMeshProUGUI VictoryText;
 
     public float eachWeightTime = 5.0f;
 
@@ -69,6 +74,32 @@ public class TurnManager : MonoBehaviour
         //OrderPanelList[3].GetComponent<Image>().color = Color.white;
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
         ChangeTurnText(currentTurn);
+        yield return new WaitForSeconds(0.3f);
+        if(NavyVessel.Length <= 0)
+        {
+            if(PirateVessel.Length <= 0)
+            {
+                VictoryText.text = "Draw!";
+                VictoryText.color = Color.black;
+                VictoryPanel.GetComponent<Image>().sprite = null;
+                VictoryPanel.SetActive(true);
+            }
+            else
+            {
+                VictoryText.text = "Pirates Victory!";
+                VictoryText.color = Color.red;
+                VictoryPanel.SetActive(true);
+            }
+        }
+        else
+        {
+            if(PirateVessel.Length <= 0)
+            {
+                VictoryText.text = "Navy Victory!";
+                VictoryText.color = Color.blue;
+                VictoryPanel.SetActive(true);
+            }
+        }
     }
 
     public void ChangeTurnText(TurnList turn)
@@ -76,12 +107,12 @@ public class TurnManager : MonoBehaviour
         switch (turn)
         {
             case TurnList.P1:
-                turnText.text = "Player 1";
+                turnText.text = "Navy";
                 turnText.color = Color.blue;
                 apText.gameObject.SetActive(true);
                 break;
             case TurnList.P2:
-                turnText.text = "Player 2";
+                turnText.text = "Pirates";
                 turnText.color = Color.red;
                 apText.gameObject.SetActive(true);
                 break;
@@ -91,5 +122,16 @@ public class TurnManager : MonoBehaviour
                 apText.gameObject.SetActive(false);
                 break;
         }
+    }
+
+    public void RestartPressed()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    public void QuitPressed()
+    {
+        Application.Quit();
+        Debug.Log("Application Quit");
     }
 }
