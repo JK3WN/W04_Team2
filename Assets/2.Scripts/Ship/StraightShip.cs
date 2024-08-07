@@ -26,6 +26,7 @@ public class StraightShip : ShipBase
 
         for (int i = 0; i < attackPositions.Count; i++)
         {
+            Instantiate(boomPrefab, attackPositions[i], Quaternion.identity);
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
             foreach (var collider in hitColliders)
             {
