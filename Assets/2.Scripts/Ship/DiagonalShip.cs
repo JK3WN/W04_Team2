@@ -35,7 +35,9 @@ public class DiagonalShip : ShipBase
                 }
                 else if (collider.gameObject.CompareTag("Land"))
                 {
-                    Destroy(collider.gameObject);
+                    //Destroy(collider.gameObject);
+                    collider.gameObject.GetComponent<CreateDirt>().hp--;
+                    return;
                 }
             }
         }

@@ -20,7 +20,6 @@ public class TurnManager : MonoBehaviour
     // YJK, UI 관련 오브젝트들
     public Button endTurnButton;
     public TMPro.TextMeshProUGUI turnText, apText;
-    public GameObject[] OrderPanelList;
 
     public float eachWeightTime = 5.0f;
 
@@ -60,14 +59,14 @@ public class TurnManager : MonoBehaviour
     // YJK, 무게별 함선들을 eachWeightTime마다 시작하라는 이벤트 보냄
     IEnumerator BoatTurn()
     {
-        for(int i = 1; i <= 4; i++)
+        for(int i = 1; i < 2; i++)
         {
             WeightStart?.Invoke(i);
-            if(i > 1) OrderPanelList[i-2].GetComponent<Image>().color = Color.white;
-            OrderPanelList[i - 1].GetComponent<Image>().color = Color.green;
+            //if(i > 1) OrderPanelList[i-2].GetComponent<Image>().color = Color.white;
+            //OrderPanelList[i - 1].GetComponent<Image>().color = Color.green;
             yield return new WaitForSeconds(eachWeightTime);
         }
-        OrderPanelList[3].GetComponent<Image>().color = Color.white;
+        //OrderPanelList[3].GetComponent<Image>().color = Color.white;
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
         ChangeTurnText(currentTurn);
     }

@@ -88,7 +88,8 @@ public class ShipBase : MonoBehaviour
         }
         Invoke("DeathCheck", 0.1f);
 
-        if (weight == CallWeight) Attack();
+        //if (weight == CallWeight) Attack();
+        Attack();
         
     }
 
@@ -106,7 +107,8 @@ public class ShipBase : MonoBehaviour
                 }
                 else if (collider.gameObject.CompareTag("Land"))
                 {
-                    Destroy(collider.gameObject);
+                    //Destroy(collider.gameObject);
+                    collider.gameObject.GetComponent<CreateDirt>().hp--;
                 }
 
             }
