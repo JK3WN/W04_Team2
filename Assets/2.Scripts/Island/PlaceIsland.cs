@@ -24,7 +24,7 @@ public class PlaceIsland : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             intPos = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
             hit = Physics2D.Raycast(intPos, Vector2.zero, Mathf.Infinity);
-            if (mousePosition.x > -5 && mousePosition.x < 5 && mousePosition.y > -5 && mousePosition.y < 5 && (hit.collider == null || (hit.collider != null && !hit.collider.CompareTag("Ship") && !hit.collider.CompareTag("Land"))))
+            if (mousePosition.x > -5 && mousePosition.x < 5 && mousePosition.y > -5 && mousePosition.y < 5 && (hit.collider == null || (hit.collider != null && !hit.collider.CompareTag("Ship") && !hit.collider.CompareTag("Land") && !hit.collider.CompareTag("Dirt"))))
             {
                 islandPreview.SetActive(true);
                 islandPreview.transform.SetPositionAndRotation(intPos, Quaternion.identity);
