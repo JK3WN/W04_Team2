@@ -33,7 +33,7 @@ public class DiagonalShip : ShipBase
                     collider.gameObject.GetComponent<ShipBase>().Damaged(1);
                     return;
                 }
-
+                else if (collider.gameObject.CompareTag("Land")) return;
             }
         }
     }
@@ -81,7 +81,7 @@ public class DiagonalShip : ShipBase
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
             foreach (var collider in hitColliders)
             {
-                if (collider.gameObject.CompareTag("Ship")) return;
+                if (collider.gameObject.CompareTag("Ship") || collider.gameObject.CompareTag("Land")) return;
 
             }
         }

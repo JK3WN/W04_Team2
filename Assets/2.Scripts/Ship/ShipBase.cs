@@ -191,18 +191,20 @@ public class ShipBase : MonoBehaviour
         ArrowButton arrowButton = currentArrowButton.GetComponent<ArrowButton>();
         arrowButton.ship = this;
 
-        RectTransform buttonRectTransform = currentButton.GetComponent<RectTransform>();
-        buttonRectTransform.position = transform.position + new Vector3(-0.1f, 0.7f, 0);
-        RectTransform checkRectTransform = currentCheckButton.GetComponent<RectTransform>();
-        checkRectTransform.position = transform.position + new Vector3(0.5f, 0.7f, 0);
         SetArrowButton();
+        RectTransform buttonRectTransform = currentButton.GetComponent<RectTransform>();
+        if (position.y > 0) buttonRectTransform.position = transform.position + new Vector3(-0.1f, -0.6f, 0);
+        else buttonRectTransform.position = transform.position + new Vector3(-0.1f, 0.6f, 0);
+        RectTransform checkRectTransform = currentCheckButton.GetComponent<RectTransform>();
+        if (position.y > 0) checkRectTransform.position = transform.position + new Vector3(0.5f, -0.6f, 0);
+        else checkRectTransform.position = transform.position + new Vector3(0.5f, 0.6f, 0);
     }
 
     public void SetArrowButton()
     {
         RectTransform arrowRectTransform = currentArrowButton.GetComponent<RectTransform>();
         arrowRectTransform.rotation = transform.rotation;
-        arrowRectTransform.position = transform.position - transform.up;
+        arrowRectTransform.position = transform.position - transform.up * 1.3f;
     }
 
     public virtual void CreateHP()
