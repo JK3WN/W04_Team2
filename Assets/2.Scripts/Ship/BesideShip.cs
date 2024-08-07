@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class BasicShip : ShipBase
+public class BesideShip : ShipBase
 {
     public override void Start()
     {
         base.Start();
 
-        weight = 1;
+        weight = 2;
         currentHP = weight;
         attackDir = Vector2.down;
         attackPositions.Add(position + attackDir);
+        attackPositions.Add(position - attackDir);
     }
 
     public override void Attack()
@@ -31,5 +33,6 @@ public class BasicShip : ShipBase
         base.ResetAttackRange();
         attackPositions.Clear();
         attackPositions.Add(position + attackDir);
+        attackPositions.Add(position - attackDir);
     }
 }

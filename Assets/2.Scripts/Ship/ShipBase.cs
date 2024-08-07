@@ -8,20 +8,26 @@ public class ShipBase : MonoBehaviour
 {
     public int weight;
     public int currentHP;
-    public Vector2 position;
-    public Vector2 attackDir;
-    public List<Vector2> attackPositions;
+    public TurnList team;
+
+    protected Vector2 position;
+    protected Vector2 attackDir;
+    protected List<Vector2> attackPositions;
     public GameObject attackTilePrefab;
+
     public bool clicked;
+    protected Quaternion tempRotation;
 
     public Canvas canvas;
     public GameObject buttonPrefab;
     public GameObject currentButton;
+    public GameObject checkButtonPrefab;
+    protected GameObject currentCheckButton;
     public GameObject hpTextPrefab;
-    public GameObject hpUI;
-    public TextMeshProUGUI hpText;
+    protected GameObject hpUI;
+    protected TextMeshProUGUI hpText;
 
-    public TurnManager turnManager;
+    protected TurnManager turnManager;
 
     //public ShipManager shipManager;
 
@@ -52,11 +58,13 @@ public class ShipBase : MonoBehaviour
         if (clicked)
         {
             clicked = false;
+            transform.rotation = tempRotation;
             foreach (Transform child in transform)
             {
                 Destroy(child.gameObject);
             }
             Destroy(currentButton);
+            Destroy(currentCheckButton);
         }
         Invoke("DeathCheck", 0.3f);
     }
@@ -100,8 +108,6 @@ public class ShipBase : MonoBehaviour
     public virtual void Rotate()
     {
         transform.Rotate(0, 0, 90);
-        attackDir = - transform.up;
-        Debug.Log(attackDir);
     }
 
     public virtual void OnMouseDown()
@@ -111,15 +117,18 @@ public class ShipBase : MonoBehaviour
             if (clicked)
             {
                 clicked = false;
+                transform.rotation = tempRotation;
                 foreach (Transform child in transform)
                 {
                     Destroy(child.gameObject);
                 }
                 Destroy(currentButton);
+                Destroy(currentCheckButton);
             }
             else
             {
                 clicked = true;
+                tempRotation = transform.rotation;
                 ShowAttackRange();
                 ShowButton();
             }
@@ -129,21 +138,37 @@ public class ShipBase : MonoBehaviour
     }
     public virtual void ShowAttackRange()
     {
-        GameObject attackTile = Instantiate(attackTilePrefab, new Vector3(attackPositions[0].x, attackPositions[0].y, 0), Quaternion.identity);
-        attackTile.transform.SetParent(transform);
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < attackPositions.Count; i++)
+        {
+            GameObject attackTile = Instantiate(attackTilePrefab, new Vector3(attackPositions[i].x, attackPositions[i].y, 0), Quaternion.identity);
+            attackTile.transform.SetParent(transform);
+        }
+
     }
 
     public virtual void ShowButton()
     {
         currentButton = Instantiate(buttonPrefab);
+        currentCheckButton = Instantiate(checkButtonPrefab);
 
         currentButton.transform.SetParent(canvas.transform, false);
+        currentCheckButton.transform.SetParent(canvas.transform, false);
 
         ButtonScript buttonScript = currentButton.GetComponent<ButtonScript>();
         buttonScript.ship = this;
+        CheckButton checkButton = currentCheckButton.GetComponent<CheckButton>();
+        checkButton.ship = this;
 
         RectTransform buttonRectTransform = currentButton.GetComponent<RectTransform>();
-        buttonRectTransform.position = transform.position + new Vector3(0, 1, 0);
+        buttonRectTransform.position = transform.position + new Vector3(-0.1f, 0.7f, 0);
+        RectTransform checkRectTransform = currentCheckButton.GetComponent<RectTransform>();
+        checkRectTransform.position = transform.position + new Vector3(0.5f, 0.7f, 0);
+       
     }
 
     public virtual void CreateHP()
@@ -169,5 +194,10 @@ public class ShipBase : MonoBehaviour
         {
             Debug.LogWarning("hpText is not assigned.");
         }
+    }
+
+    public virtual void ResetAttackRange()
+    {
+
     }
 }
