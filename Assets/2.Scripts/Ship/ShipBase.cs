@@ -52,9 +52,6 @@ public class ShipBase : MonoBehaviour
 
     private void OnWeightStart(int CallWeight)
     {
-        if (weight != CallWeight) return;
-        // YJK, 자기 weight와 동일한 event가 들어올 때만 진행
-        Attack();
         if (clicked)
         {
             clicked = false;
@@ -66,7 +63,10 @@ public class ShipBase : MonoBehaviour
             Destroy(currentButton);
             Destroy(currentCheckButton);
         }
-        Invoke("DeathCheck", 0.3f);
+        Invoke("DeathCheck", 0.1f);
+
+        if (weight == CallWeight) Attack();
+        
     }
 
     public virtual void Attack() // attack
@@ -133,8 +133,6 @@ public class ShipBase : MonoBehaviour
                 ShowButton();
             }
         }
-
-        
     }
     public virtual void ShowAttackRange()
     {

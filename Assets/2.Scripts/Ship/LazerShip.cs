@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
-public class StraightShip : ShipBase
+public class LazerShip : ShipBase
 {
     public override void Start()
     {
         base.Start();
 
-        weight = 3;
+        weight = 4;
         currentHP = weight;
         attackDir = -transform.up;
-        
-        for(int i = 1; i < 10; i++)
+        for (int i = 1; i < 10; i++)
         {
             if ((position + attackDir * i).x < -5 || (position + attackDir * i).x > 5 || (position + attackDir * i).y < -5 || (position + attackDir * i).y > 5) break;
             attackPositions.Add(position + attackDir * i);
         }
-
     }
-
     public override void Attack()
     {
 
@@ -32,7 +30,6 @@ public class StraightShip : ShipBase
                 if (collider.gameObject.CompareTag("Ship"))
                 {
                     collider.gameObject.GetComponent<ShipBase>().Damaged(1);
-                    return;
                 }
 
             }
@@ -87,12 +84,6 @@ public class StraightShip : ShipBase
         {
             GameObject attackTile = Instantiate(attackTilePrefab, new Vector3(attackPositions[i].x, attackPositions[i].y, 0), Quaternion.identity);
             attackTile.transform.SetParent(transform);
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
-            foreach (var collider in hitColliders)
-            {
-                if (collider.gameObject.CompareTag("Ship")) return;
-
-            }
         }
     }
 

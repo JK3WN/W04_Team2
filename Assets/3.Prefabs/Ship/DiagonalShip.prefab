@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1733710847542562065}
   - component: {fileID: 1167082770493080256}
-  - component: {fileID: 4995300144687955517}
   - component: {fileID: 7807520983980524465}
+  - component: {fileID: 2687259061477008659}
   m_Layer: 5
   m_Name: DiagonalShip
   m_TagString: Ship
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: -0.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 60
-  m_Sprite: {fileID: 21300000, guid: f18e2cf0de75e794d867484ea82acb5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa28600e9a1ed534fa8b5d37c14d53a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,8 +86,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &4995300144687955517
-CapsuleCollider2D:
+--- !u!114 &7807520983980524465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8186776764893436717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45ddc91b9fe9f34b9a4fa232ebff70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 2
+  currentHP: 0
+  team: 2
+  attackTilePrefab: {fileID: 5886958740152642960, guid: 80e3b404bf06bf44981c2d4dae68f9bc, type: 3}
+  clicked: 0
+  canvas: {fileID: 0}
+  buttonPrefab: {fileID: 5997144669560076428, guid: 3deb29ca08899154591664e7768aef16, type: 3}
+  currentButton: {fileID: 0}
+  checkButtonPrefab: {fileID: 1695171478318884752, guid: 584d31c5957c85745b92257801f9cbe9, type: 3}
+  hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
+--- !u!61 &2687259061477008659
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,32 +137,19 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.03125, y: 1.765625}
-  m_Direction: 0
---- !u!114 &7807520983980524465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8186776764893436717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45ddc91b9fe9f34b9a4fa232ebff70e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 2
-  currentHP: 0
-  team: 2
-  attackTilePrefab: {fileID: 5886958740152642960, guid: 80e3b404bf06bf44981c2d4dae68f9bc, type: 3}
-  clicked: 0
-  canvas: {fileID: 0}
-  buttonPrefab: {fileID: 5997144669560076428, guid: 3deb29ca08899154591664e7768aef16, type: 3}
-  currentButton: {fileID: 0}
-  checkButtonPrefab: {fileID: 1695171478318884752, guid: 584d31c5957c85745b92257801f9cbe9, type: 3}
-  hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
-  currentTeam: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.66, y: 1.13}
+    newSize: {x: 1.03125, y: 1.765625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.66, y: 1.13}
+  m_EdgeRadius: 0

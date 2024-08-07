@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 60
-  m_Sprite: {fileID: 21300000, guid: 9487cfb8e4f6b434bbfae10e235f2895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6960c7253fd9ade4a99b008699b94436, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,7 +108,6 @@ MonoBehaviour:
   currentButton: {fileID: 0}
   checkButtonPrefab: {fileID: 1695171478318884752, guid: 584d31c5957c85745b92257801f9cbe9, type: 3}
   hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
-  currentTeam: 0
 --- !u!70 &7024894571711622091
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -141,6 +140,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.03125, y: 1.765625}
+  m_Offset: {x: 0, y: 0.010429382}
+  m_Size: {x: 1.03125, y: 1.03125}
   m_Direction: 0
