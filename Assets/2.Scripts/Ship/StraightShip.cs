@@ -65,6 +65,8 @@ public class StraightShip : ShipBase
                 tempRotation = transform.rotation;
                 ShowAttackRange();
                 if (TurnManager.currentTurn == team && GameManager.instance.ActionPoints > 0) ShowButton();
+                ShipPanel.SetActive(true);
+                ShowShipInfo();
             }
         }
     }

@@ -169,6 +169,7 @@ public class ShipBase : MonoBehaviour
         Debug.DrawLine(upPos.position, upPos.position + (Vector3)downDirection * 100f, Color.red, 2f);
 
         StartCoroutine(MoveToPos(ray));
+
     }
     IEnumerator MoveToPos(RaycastHit2D rays)
     {
@@ -184,7 +185,7 @@ public class ShipBase : MonoBehaviour
 
                 if (rays.collider.CompareTag("Dirt"))
                 {
-                    if (Mathf.Round(Vector2.Distance(transform.position, rays.point)) == 0)
+                    if (Mathf.Round(Vector2.Distance(transform.position, rays.collider.transform.position)) == 0)
                     {
                         canMove = false;
                         transform.position = new Vector2(Mathf.Floor(transform.position.x) + 0.5f, Mathf.Floor(transform.position.y) + 0.5f);
@@ -199,15 +200,16 @@ public class ShipBase : MonoBehaviour
                 }
 
                 transform.Translate(Vector2.down * 10 * Time.deltaTime);
-                RepositionUI();
+                
             }
         }
+        RepositionUI();
     }
 
     public virtual void OnMouseDown()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
+        //if (!EventSystem.current.IsPointerOverGameObject())
+        //{
             if (clicked)
             {
                 clickOff();
@@ -223,7 +225,7 @@ public class ShipBase : MonoBehaviour
                 ShipPanel.SetActive(true);
                 ShowShipInfo();
             }
-        }
+        //}
     }
     public virtual void ShowAttackRange()
     {
@@ -316,7 +318,7 @@ public class ShipBase : MonoBehaviour
         ShipPanel.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = name;
         ShipPanel.transform.Find("ShipImage").GetComponent<Image>().sprite = this.transform.Find("GameObject").GetComponent<SpriteRenderer>().sprite;
         ShipPanel.transform.Find("ShipImage").GetComponent<Image>().SetNativeSize();
-        ShipPanel.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = currentHP + " / " + weight + "\n" + (5 - weight);
+        ShipPanel.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = currentHP + " / 3";
     }
 
     public void clickOff()
