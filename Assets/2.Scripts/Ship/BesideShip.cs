@@ -9,7 +9,7 @@ public class BesideShip : ShipBase
     {
         base.Start();
 
-        weight = 2;
+        weight = 3;
         currentHP = weight;
         ResetAttackRange();
     }

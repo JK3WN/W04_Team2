@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 60
-  m_Sprite: {fileID: 21300000, guid: aa28600e9a1ed534fa8b5d37c14d53a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab972631698b1844c8509c1b25c56cc4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45ddc91b9fe9f34b9a4fa232ebff70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 2
-  currentHP: 0
-  team: 2
+  weight: 3
+  currentHP: 3
+  team: 0
   attackTilePrefab: {fileID: 5886958740152642960, guid: 80e3b404bf06bf44981c2d4dae68f9bc, type: 3}
   clicked: 0
   tempRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -148,10 +148,12 @@ MonoBehaviour:
   currentArrowButton: {fileID: 0}
   ShipPanel: {fileID: 0}
   shipSpriteList:
-  - {fileID: 21300000, guid: aa28600e9a1ed534fa8b5d37c14d53a6, type: 3}
-  - {fileID: 21300000, guid: 6efb8cfff23dd334fb15c3b984d43656, type: 3}
-  - {fileID: 21300000, guid: d3792bf0d22fa5b4cad136d36976e9d6, type: 3}
-  - {fileID: 21300000, guid: c7fc86b27dd4ffc4585e74916a78d71b, type: 3}
+  - {fileID: 21300000, guid: ab972631698b1844c8509c1b25c56cc4, type: 3}
+  - {fileID: 21300000, guid: 22e2ac6174219794388a7d79c1f3b408, type: 3}
+  - {fileID: 21300000, guid: 1c53dd5ce7dea164ea2e24908eec09c6, type: 3}
+  - {fileID: 21300000, guid: 43c96ee551a84a94dab6c7d31361bbe7, type: 3}
+  - {fileID: 21300000, guid: 4657c22be47eb8941a427207576e75f6, type: 3}
+  - {fileID: 21300000, guid: e0ec20298c051ec4181cd881c8682fa5, type: 3}
   mask:
     serializedVersion: 2
     m_Bits: 160

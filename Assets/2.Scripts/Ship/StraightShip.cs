@@ -34,7 +34,12 @@ public class StraightShip : ShipBase
                     collider.gameObject.GetComponent<ShipBase>().Damaged(1);
                     return;
                 }
-                else if (collider.gameObject.CompareTag("Land")) return;
+                else if (collider.gameObject.CompareTag("Land"))
+                {
+                    //Destroy(collider.gameObject);
+                    collider.gameObject.GetComponent<CreateDirt>().hp--;
+                    return;
+                }
 
             }
         }

@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 3
-  currentHP: 0
+  currentHP: 3
   team: 0
   attackTilePrefab: {fileID: 5886958740152642960, guid: 80e3b404bf06bf44981c2d4dae68f9bc, type: 3}
   clicked: 0
@@ -64,12 +64,12 @@ MonoBehaviour:
   currentArrowButton: {fileID: 0}
   ShipPanel: {fileID: 0}
   shipSpriteList:
-  - {fileID: 21300000, guid: 3213f1b1521b5d34cb3737287bb28fa0, type: 3}
-  - {fileID: 21300000, guid: 9968bbe2eeab1c040be91b1cd029480f, type: 3}
-  - {fileID: 21300000, guid: 1c7f358d02841da49918dcc5cc4b9d55, type: 3}
-  - {fileID: 21300000, guid: 1b6e7b6203d7f944eaf2230dc084e842, type: 3}
-  - {fileID: 21300000, guid: 3e36ef62d52d5624f901e212957aea8b, type: 3}
-  - {fileID: 21300000, guid: 231e450352c67c041b28bd88d99aad13, type: 3}
+  - {fileID: 21300000, guid: f9ffc2ba2c65d1c4889a8ddf043d2d33, type: 3}
+  - {fileID: 21300000, guid: 5e2e33b3e69dbeb4585f49080bd589e6, type: 3}
+  - {fileID: 21300000, guid: 8c960a9b4ff44154baada6b263ff9a55, type: 3}
+  - {fileID: 21300000, guid: 23acd4bb3ea7802448682f031704c2b4, type: 3}
+  - {fileID: 21300000, guid: 300fbcbeb4ac51445bafb27bd7aa7260, type: 3}
+  - {fileID: 21300000, guid: 0234273e99ec48a4194961eef90990ee, type: 3}
   mask:
     serializedVersion: 2
     m_Bits: 160
@@ -235,7 +235,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 60
-  m_Sprite: {fileID: 21300000, guid: 3213f1b1521b5d34cb3737287bb28fa0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9ffc2ba2c65d1c4889a8ddf043d2d33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         isWind = false;
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if(seaLevel > 1)
@@ -61,13 +62,15 @@ public class GameManager : MonoBehaviour
         }
 
         SeaLevel();
+        
         if (Input.GetKeyDown(KeyCode.W))
         {
             ActionPoints--;
             //WindDirection();
             WindMove();
         }
-        ToFirstPosition();
+        */
+        //ToFirstPosition();
 
     }
 
