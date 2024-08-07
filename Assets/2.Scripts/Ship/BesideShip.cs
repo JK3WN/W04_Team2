@@ -11,9 +11,7 @@ public class BesideShip : ShipBase
 
         weight = 2;
         currentHP = weight;
-        attackDir = Vector2.right;
-        attackPositions.Add(position + attackDir);
-        attackPositions.Add(position - attackDir);
+        ResetAttackRange();
     }
 
     public override void Attack()
@@ -25,15 +23,20 @@ public class BesideShip : ShipBase
     public override void Rotate()
     {
         base.Rotate();
-        attackDir = transform.right;
     }
 
     public override void ResetAttackRange()
     {
         base.ResetAttackRange();
-        attackDir = transform.right;
         attackPositions.Clear();
-        attackPositions.Add(position + attackDir);
+        currentHP = weight;
+        attackDir = transform.up * 2 + transform.right;
+        attackPositions.Add(position - attackDir);
+        attackDir = transform.up + transform.right * 2;
+        attackPositions.Add(position - attackDir);
+        attackDir = transform.up * 2 - transform.right;
+        attackPositions.Add(position - attackDir);
+        attackDir = transform.up - transform.right * 2;
         attackPositions.Add(position - attackDir);
     }
 }

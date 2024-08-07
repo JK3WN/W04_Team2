@@ -24,6 +24,8 @@ public class CheckButton : MonoBehaviour
             if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
         }
         Destroy(ship.currentButton);
+        Destroy(ship.currentArrowButton);
+        ship.ShipPanel.SetActive(false);
         Destroy(this.gameObject);
     }
 }

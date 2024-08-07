@@ -95,6 +95,7 @@ public class ShipWindMove : MonoBehaviour
 
         }
 
+        ship.RepositionUI();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

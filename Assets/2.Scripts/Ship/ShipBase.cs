@@ -28,6 +28,8 @@ public class ShipBase : MonoBehaviour
     public GameObject hpTextPrefab;
     protected GameObject hpUI;
     protected TextMeshProUGUI hpText;
+    public GameObject arrowButtonPrefab;
+    public GameObject currentArrowButton;
 
     protected TurnManager turnManager;
     public GameObject ShipPanel;
@@ -133,6 +135,7 @@ public class ShipBase : MonoBehaviour
     public virtual void Rotate()
     {
         transform.Rotate(0, 0, 90);
+        SetArrowButton();
     }
 
     public virtual void OnMouseDown()
@@ -175,20 +178,31 @@ public class ShipBase : MonoBehaviour
     {
         currentButton = Instantiate(buttonPrefab);
         currentCheckButton = Instantiate(checkButtonPrefab);
+        currentArrowButton = Instantiate(arrowButtonPrefab);
 
         currentButton.transform.SetParent(canvas.transform, false);
         currentCheckButton.transform.SetParent(canvas.transform, false);
+        currentArrowButton.transform.SetParent(canvas.transform, false);
 
         ButtonScript buttonScript = currentButton.GetComponent<ButtonScript>();
         buttonScript.ship = this;
         CheckButton checkButton = currentCheckButton.GetComponent<CheckButton>();
         checkButton.ship = this;
+        ArrowButton arrowButton = currentArrowButton.GetComponent<ArrowButton>();
+        arrowButton.ship = this;
 
         RectTransform buttonRectTransform = currentButton.GetComponent<RectTransform>();
         buttonRectTransform.position = transform.position + new Vector3(-0.1f, 0.7f, 0);
         RectTransform checkRectTransform = currentCheckButton.GetComponent<RectTransform>();
         checkRectTransform.position = transform.position + new Vector3(0.5f, 0.7f, 0);
-       
+        SetArrowButton();
+    }
+
+    public void SetArrowButton()
+    {
+        RectTransform arrowRectTransform = currentArrowButton.GetComponent<RectTransform>();
+        arrowRectTransform.rotation = transform.rotation;
+        arrowRectTransform.position = transform.position - transform.up;
     }
 
     public virtual void CreateHP()
@@ -251,6 +265,7 @@ public class ShipBase : MonoBehaviour
                 }
                 Destroy(obj.currentButton);
                 Destroy(obj.currentCheckButton);
+                Destroy(obj.currentArrowButton);
                 obj.ShipPanel.SetActive(false);
             }
         }
