@@ -9,6 +9,7 @@ TagManager:
   - ShipUI
   - Reef
   - HideLand
+  - EnemyShip
   layers:
   - Default
   - TransparentFX
