@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ShipBase : MonoBehaviour
 {
@@ -28,8 +30,15 @@ public class ShipBase : MonoBehaviour
     protected TextMeshProUGUI hpText;
 
     protected TurnManager turnManager;
+    public GameObject ShipPanel;
 
     //public ShipManager shipManager;
+
+    private void Awake()
+    {
+        // YJK, 함선 정보 보여줄 UI 참조
+        if (ShipPanel == null) ShipPanel = GameObject.Find("ShipPanel");
+    }
 
     public virtual void Start()
     {
@@ -124,6 +133,7 @@ public class ShipBase : MonoBehaviour
                 }
                 Destroy(currentButton);
                 Destroy(currentCheckButton);
+                ShipPanel.SetActive(false);
             }
             else
             {
@@ -131,6 +141,8 @@ public class ShipBase : MonoBehaviour
                 tempRotation = transform.rotation;
                 ShowAttackRange();
                 ShowButton();
+                ShipPanel.SetActive(true);
+                ShowShipInfo();
             }
         }
 
@@ -199,5 +211,13 @@ public class ShipBase : MonoBehaviour
     public virtual void ResetAttackRange()
     {
 
+    }
+
+    public void ShowShipInfo()
+    {
+        ShipPanel.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = name;
+        ShipPanel.transform.Find("ShipImage").GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
+        ShipPanel.transform.Find("ShipImage").GetComponent<Image>().SetNativeSize();
+        ShipPanel.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = currentHP + " / " + weight + "\n" + (5 - weight);
     }
 }
