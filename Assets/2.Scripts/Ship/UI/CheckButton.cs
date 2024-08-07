@@ -14,8 +14,11 @@ public class CheckButton : MonoBehaviour
     }
     public void OnButtonClick()
     {
-        if(TurnManager.currentTurn == ship.team) GameManager.instance.ActionPoints -= 1;
-        else GameManager.instance.ActionPoints-= 3;
+        if(ship.tempRotation != ship.transform.rotation)
+        {
+            if (TurnManager.currentTurn == ship.team) GameManager.instance.ActionPoints -= 1;
+            else GameManager.instance.ActionPoints -= 3;
+        }
 
         ship.clicked = false;
         ship.ResetAttackRange();

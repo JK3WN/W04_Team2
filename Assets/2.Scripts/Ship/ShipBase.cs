@@ -18,7 +18,7 @@ public class ShipBase : MonoBehaviour
     public GameObject attackTilePrefab;
 
     public bool clicked;
-    protected Quaternion tempRotation;
+    public Quaternion tempRotation;
 
     public Canvas canvas;
     public GameObject buttonPrefab;
