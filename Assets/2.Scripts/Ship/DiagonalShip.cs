@@ -25,18 +25,19 @@ public class DiagonalShip : ShipBase
 
         for (int i = 0; i < attackPositions.Count; i++)
         {
-            Instantiate(boomPrefab, attackPositions[i], Quaternion.identity);
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
             foreach (var collider in hitColliders)
             {
                 if (collider.gameObject.CompareTag("Ship"))
                 {
+                    Instantiate(boomPrefab, attackPositions[i], Quaternion.identity);
                     collider.gameObject.GetComponent<ShipBase>().Damaged(1);
                     return;
                 }
                 else if (collider.gameObject.CompareTag("Land"))
                 {
                     //Destroy(collider.gameObject);
+                    Instantiate(boomPrefab, attackPositions[i], Quaternion.identity);
                     collider.gameObject.GetComponent<CreateDirt>().hp--;
                     return;
                 }

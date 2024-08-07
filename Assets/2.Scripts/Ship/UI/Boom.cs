@@ -18,8 +18,11 @@ public class Boom : MonoBehaviour
 
     private void ChangeSprite()
     {
-        if (index >= sprites.Count) Destroy(gameObject);
-        spriteRenderer.sprite = sprites[index];
-        index++;
+        if (index >= 3) Destroy(gameObject);
+        else
+        {
+            spriteRenderer.sprite = sprites[index];
+            index++;
+        }
     }
 }
