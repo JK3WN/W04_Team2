@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ShipClickMove : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
+    public bool isSelected;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +16,18 @@ public class ShipClickMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.GetComponent<Player>().intPosition != new Vector2(0,0))
+        if (isSelected)
         {
-            transform.position = player.GetComponent<Player>().intPosition;
+            if (player.GetComponent<Player>().intPosition != new Vector2(0, 0))
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    transform.position = player.GetComponent<Player>().intPosition;
+                    isSelected = false;
+                    player.GetComponent<Player>().selectedShip = null;
+
+                }
+            }
         }
     }
 }

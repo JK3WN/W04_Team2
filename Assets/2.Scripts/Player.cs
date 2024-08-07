@@ -5,6 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Vector2 intPosition;
+    public GameObject selectedShip;
+    public RaycastHit2D hit;
+
+    public LayerMask hitLayerMask;
 
     void Update()
     {
@@ -17,9 +21,19 @@ public class Player : MonoBehaviour
             // 클릭 위치를 int형으로 변환 (소수점 이하 자르기)
             intPosition = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
 
+            hit = Physics2D.Raycast(intPosition, Vector2.zero, Mathf.Infinity, hitLayerMask);
+
+            if (hit.collider != null)
+            {
+                if (hit.collider.CompareTag("Ship"))
+                {
+                    selectedShip = hit.collider.gameObject;
+                    selectedShip.GetComponent<ShipClickMove>().isSelected = true;
+                }
+            }
 
             // 클릭한 위치의 월드 좌표를 출력
-            Debug.Log("Clicked Position: " + intPosition);
+            //Debug.Log("Clicked Position: " + intPosition);
 
             StartCoroutine(Zero());
         }
