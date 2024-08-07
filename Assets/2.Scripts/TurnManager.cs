@@ -75,9 +75,9 @@ public class TurnManager : MonoBehaviour
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
         ChangeTurnText(currentTurn);
         yield return new WaitForSeconds(0.3f);
-        if(NavyVessel.Length <= 0)
+        if(NavyVessel[0] == null && NavyVessel[1] == null && NavyVessel[2] == null)
         {
-            if(PirateVessel.Length <= 0)
+            if(PirateVessel[0] == null && PirateVessel[1] == null && PirateVessel[2] == null)
             {
                 VictoryText.text = "Draw!";
                 VictoryText.color = Color.black;
@@ -93,7 +93,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
-            if(PirateVessel.Length <= 0)
+            if(PirateVessel[0] == null && PirateVessel[1] == null && PirateVessel[2] == null)
             {
                 VictoryText.text = "Navy Victory!";
                 VictoryText.color = Color.blue;
