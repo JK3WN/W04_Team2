@@ -7,9 +7,6 @@ public class RandomSpawnManager : MonoBehaviour
     public List<GameObject> lands;
     public List<Vector2> spawnedPos;
 
-    public GameObject heightOne;
-    public GameObject heightTwo;
-
     public GameObject[] spawnedFirst;
 
     private bool canSpawn;
@@ -17,7 +14,7 @@ public class RandomSpawnManager : MonoBehaviour
     public int MaxspawnCount;
 
 
-    void Start()
+    void Awake()
     {
         
         spawnedPos = new List<Vector2>();
