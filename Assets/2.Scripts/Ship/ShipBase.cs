@@ -103,6 +103,10 @@ public class ShipBase : MonoBehaviour
                 {
                     collider.gameObject.GetComponent<ShipBase>().Damaged(1);
                 }
+                else if (collider.gameObject.CompareTag("Land"))
+                {
+                    Destroy(collider.gameObject);
+                }
 
             }
         }
