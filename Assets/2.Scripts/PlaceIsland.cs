@@ -9,6 +9,8 @@ public class PlaceIsland : MonoBehaviour
     public Vector2 intPos;
     public bool islandReady = false;
 
+    public RaycastHit2D hit;
+
     // Update is called once per frame
     void Update()
     {
@@ -16,9 +18,11 @@ public class PlaceIsland : MonoBehaviour
         if (islandReady)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (mousePosition.x > -5 && mousePosition.x < 5 && mousePosition.y > -5 && mousePosition.y < 5)
+            intPos = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
+            hit = Physics2D.Raycast(intPos, Vector2.zero, Mathf.Infinity);
+            Debug.Log(hit.collider);
+            if (mousePosition.x > -5 && mousePosition.x < 5 && mousePosition.y > -5 && mousePosition.y < 5 && (hit.collider == null || (hit.collider != null && !hit.collider.CompareTag("Ship") && !hit.collider.CompareTag("Land"))))
             {
-                intPos = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
                 islandPreview.SetActive(true);
                 islandPreview.transform.SetPositionAndRotation(intPos, Quaternion.identity);
                 if (Input.GetMouseButtonDown(0))
