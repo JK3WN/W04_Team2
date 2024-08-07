@@ -221,7 +221,7 @@ public class ShipBase : MonoBehaviour
     public void ShowShipInfo()
     {
         ShipPanel.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = name;
-        ShipPanel.transform.Find("ShipImage").GetComponent<Image>().sprite = this.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        ShipPanel.transform.Find("ShipImage").GetComponent<Image>().sprite = this.transform.Find("GameObject").GetComponent<SpriteRenderer>().sprite;
         ShipPanel.transform.Find("ShipImage").GetComponent<Image>().SetNativeSize();
         ShipPanel.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = currentHP + " / " + weight + "\n" + (5 - weight);
     }
