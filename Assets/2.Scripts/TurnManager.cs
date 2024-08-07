@@ -51,6 +51,7 @@ public class TurnManager : MonoBehaviour
     public void EndTurnClicked()
     {
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
+        if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
         GameManager.instance.ActionPoints = 10;
         ChangeTurnText(currentTurn);
         StartCoroutine("BoatTurn");
