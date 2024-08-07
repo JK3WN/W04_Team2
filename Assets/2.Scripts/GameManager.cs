@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [Header("Sea - Wind")]
     public bool isWind;
     public Vector2 windDIrection;
+    public GameObject[] ships;
+    public List<Vector3> shipsTransform;
 
     private void Awake()
     {
@@ -32,6 +34,46 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
+        FindLands();
+        FindShips();
+        
+    }
+
+    void Update()
+    {
+        isWind = false;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if(seaLevel > 1)
+            {
+                seaLevel--;
+                ActionPoints--;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (seaLevel < 3)
+            {
+                seaLevel++;
+                ActionPoints--;
+            }
+        }
+
+        SeaLevel();
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            ActionPoints--;
+            WindDirection();
+            WindMove();
+        }
+        ToFirstPosition();
+
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    void FindLands()
+    {
         lands = GameObject.FindGameObjectsWithTag("Land");
         reefs = GameObject.FindGameObjectsWithTag("Reef");
 
@@ -44,29 +86,6 @@ public class GameManager : MonoBehaviour
             landsList.Add(reefs[i]);
         }
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if(seaLevel > 1)
-            {
-                seaLevel--;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (seaLevel < 3)
-            {
-                seaLevel++;
-            }
-        }
-
-        SeaLevel();
-        WindDirection();
-    }
-
-
     void SeaLevel()
     {
         if (seaLevel == 1)
@@ -140,14 +159,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    void FindShips()
+    {
+        ships = GameObject.FindGameObjectsWithTag("Ship");
+        for (int i = 0; i < ships.Length; i++)
+        {
+            shipsTransform.Add(ships[i].transform.position);
+        }
+    }
     void WindDirection()
     {
-        if (isWind)
-        {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
             
-            windDIrection = new Vector2(horizontal, vertical);
+        windDIrection = new Vector2(horizontal, vertical);
+    }
+    void WindMove()
+    {
+        for (int i = 0; i < ships.Length; i++)
+        {
+            ships[i].GetComponent<ShipWindMove>().Move();
+        }
+    }
+    void ToFirstPosition()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            for (int i = 0; i < ships.Length; i++)
+            {
+                ships[i].transform.position = shipsTransform[i];
+            }
+
         }
     }
 }
