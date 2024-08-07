@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public enum TurnList
@@ -21,6 +20,7 @@ public class TurnManager : MonoBehaviour
     // YJK, UI 관련 오브젝트들
     public Button endTurnButton;
     public TMPro.TextMeshProUGUI turnText, apText;
+    public GameObject[] OrderPanelList;
 
     public float eachWeightTime = 5.0f;
 
@@ -30,6 +30,7 @@ public class TurnManager : MonoBehaviour
         currentTurn = TurnList.P1;
         GameManager.instance.ActionPoints = 10;
         ChangeTurnText(currentTurn);
+        GameObject.Find("ShipPanel").SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,8 +62,11 @@ public class TurnManager : MonoBehaviour
         for(int i = 1; i <= 4; i++)
         {
             WeightStart?.Invoke(i);
+            if(i > 1) OrderPanelList[i-2].GetComponent<Image>().color = Color.white;
+            OrderPanelList[i - 1].GetComponent<Image>().color = Color.green;
             yield return new WaitForSeconds(eachWeightTime);
         }
+        OrderPanelList[3].GetComponent<Image>().color = Color.white;
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
         ChangeTurnText(currentTurn);
     }
