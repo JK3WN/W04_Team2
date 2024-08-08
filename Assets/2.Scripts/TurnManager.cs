@@ -68,7 +68,7 @@ public class TurnManager : MonoBehaviour
         for(int i = 1; i < 2; i++)
         {
             WeightStart?.Invoke(i);
-            GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
             //if(i > 1) OrderPanelList[i-2].GetComponent<Image>().color = Color.white;
             //OrderPanelList[i - 1].GetComponent<Image>().color = Color.green;
             yield return new WaitForSeconds(eachWeightTime);
