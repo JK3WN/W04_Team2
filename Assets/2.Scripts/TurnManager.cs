@@ -25,6 +25,7 @@ public class TurnManager : MonoBehaviour
     public GameObject[] NavyVessel, PirateVessel;
     public GameObject VictoryPanel;
     public TMPro.TextMeshProUGUI VictoryText;
+    public Sprite NavyImage, PirateImage;
 
     public float eachWeightTime = 5.0f;
 
@@ -67,6 +68,7 @@ public class TurnManager : MonoBehaviour
         for(int i = 1; i < 2; i++)
         {
             WeightStart?.Invoke(i);
+            GetComponent<AudioSource>().Play();
             //if(i > 1) OrderPanelList[i-2].GetComponent<Image>().color = Color.white;
             //OrderPanelList[i - 1].GetComponent<Image>().color = Color.green;
             yield return new WaitForSeconds(eachWeightTime);
@@ -88,6 +90,7 @@ public class TurnManager : MonoBehaviour
             {
                 VictoryText.text = "Pirates Victory!";
                 VictoryText.color = Color.red;
+                VictoryPanel.GetComponent<Image>().sprite = PirateImage;
                 VictoryPanel.SetActive(true);
             }
         }
@@ -97,6 +100,7 @@ public class TurnManager : MonoBehaviour
             {
                 VictoryText.text = "Navy Victory!";
                 VictoryText.color = Color.blue;
+                VictoryPanel.GetComponent<Image>().sprite = NavyImage;
                 VictoryPanel.SetActive(true);
             }
         }
