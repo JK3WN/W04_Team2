@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 3
   currentHP: 3
+  actionPoint: 0
   team: 0
   attackTilePrefab: {fileID: 5886958740152642960, guid: 80e3b404bf06bf44981c2d4dae68f9bc, type: 3}
   clicked: 0
@@ -118,7 +119,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85, y: 0.85}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &1351129305367930045
 MonoBehaviour:

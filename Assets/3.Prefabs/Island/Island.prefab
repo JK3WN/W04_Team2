@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dirt: {fileID: 1304985555989107926, guid: 93a65cbb87425124cac9fc0acfada2ab, type: 3}
+  hp: 1
+  turnManager: {fileID: 0}
 --- !u!61 &2390382059772167471
 BoxCollider2D:
   m_ObjectHideFlags: 0
