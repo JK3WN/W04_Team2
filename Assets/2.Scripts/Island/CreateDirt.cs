@@ -40,7 +40,7 @@ public class CreateDirt : MonoBehaviour
     {
         if(hp <= 0)
         {
-            GameObject dirtInstance = GameObject.Instantiate(dirt, transform.position, Quaternion.identity);
+            //GameObject dirtInstance = GameObject.Instantiate(dirt, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
