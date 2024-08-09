@@ -88,7 +88,7 @@ public class ShipBase : MonoBehaviour
 
         //if (weight == CallWeight) Attack();
 
-        Attack();
+        if (TurnManager.currentTurn == (team+1)) Attack(); // °ø°Ý±Ç?
         actionPoint = 2;
         selected = false;
     }

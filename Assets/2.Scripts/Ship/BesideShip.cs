@@ -24,12 +24,29 @@ public class BesideShip : ShipBase
     {
         base.Rotate();
     }
+    public override void OnMouseDown()
+    {
+        if (clicked)
+        {
+            clickOff();
+            ResetAttackRange();
+        }
+        else
+        {
+            clickOff();
+            clicked = true;
+            tempRotation = transform.rotation;
+            ShowAttackRange();
+            if (TurnManager.currentTurn == team && actionPoint > 0 && CheckSelected()) ShowButton();
+            ShipPanel.SetActive(true);
+            ShowShipInfo();
+        }
+    }
 
     public override void ResetAttackRange()
     {
         base.ResetAttackRange();
         attackPositions.Clear();
-        currentHP = weight;
         attackDir = transform.up * 2 + transform.right;
         attackPositions.Add(position - attackDir);
         attackDir = transform.up + transform.right * 2;
@@ -37,6 +54,15 @@ public class BesideShip : ShipBase
         attackDir = transform.up * 2 - transform.right;
         attackPositions.Add(position - attackDir);
         attackDir = transform.up - transform.right * 2;
+        attackPositions.Add(position - attackDir);
+
+        attackDir = -transform.up * 2 + transform.right;
+        attackPositions.Add(position - attackDir);
+        attackDir = -transform.up + transform.right * 2;
+        attackPositions.Add(position - attackDir);
+        attackDir = -transform.up * 2 - transform.right;
+        attackPositions.Add(position - attackDir);
+        attackDir = -transform.up - transform.right * 2;
         attackPositions.Add(position - attackDir);
     }
 }
