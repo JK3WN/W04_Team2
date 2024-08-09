@@ -168,4 +168,22 @@ public class TurnManager : MonoBehaviour
             }
         }
     }
+
+    public void Surrender()
+    {
+        if(currentTurn == TurnList.P1)
+        {
+            VictoryText.text = "Pirates Victory!";
+            VictoryText.color = Color.red;
+            VictoryPanel.GetComponent<Image>().sprite = PirateImage;
+            VictoryPanel.SetActive(true);
+        }
+        else
+        {
+            VictoryText.text = "Navy Victory!";
+            VictoryText.color = Color.blue;
+            VictoryPanel.GetComponent<Image>().sprite = NavyImage;
+            VictoryPanel.SetActive(true);
+        }
+    }
 }
