@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public enum TurnList
 {
@@ -28,7 +29,7 @@ public class TurnManager : MonoBehaviour
     public Sprite NavyImage, PirateImage;
 
     public float eachWeightTime = 5.0f;
-
+    private bool rangeOn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -137,5 +138,34 @@ public class TurnManager : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Application Quit");
+    }
+
+    public void ShowAttackRange()
+    {
+        if (rangeOn)
+        {
+            rangeOn = false;
+            ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+            foreach (ShipBase obj in foundObjects)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+                }
+            }
+        }
+        else
+        {
+            rangeOn=true;
+            ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+            foreach (ShipBase obj in foundObjects)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+                }
+                obj.ShowAttackRange();
+            }
+        }
     }
 }

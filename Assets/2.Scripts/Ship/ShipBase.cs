@@ -308,15 +308,17 @@ public class ShipBase : MonoBehaviour
         ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
         foreach (ShipBase obj in foundObjects)
         {
+            foreach (Transform child in obj.transform)
+            {
+                if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+            }
+
             if (obj.clicked)
             {
                 obj.clicked = false;
                 obj.transform.rotation = obj.tempRotation;
                 obj.ReAssignAttackDir();
-                foreach (Transform child in obj.transform)
-                {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
+                
                 Destroy(obj.currentButton);
                 Destroy(obj.currentCheckButton);
                 Destroy(obj.currentArrowButton);
