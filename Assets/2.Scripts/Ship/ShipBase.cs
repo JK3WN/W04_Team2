@@ -47,6 +47,8 @@ public class ShipBase : MonoBehaviour
 
     public Transform upPos;
     private bool canMove;
+
+    public bool selected;
     private void Awake()
     {
         // YJK, 함선 정보 보여줄 UI 참조
@@ -69,6 +71,7 @@ public class ShipBase : MonoBehaviour
         
         currentHP = weight;
         actionPoint = 2;
+        selected = false;
         CreateHP();
     }
 
@@ -87,6 +90,7 @@ public class ShipBase : MonoBehaviour
 
         Attack();
         actionPoint = 2;
+        selected = false;
     }
 
     public virtual void Attack() // attack
@@ -154,6 +158,7 @@ public class ShipBase : MonoBehaviour
     {
         canMove = true;
         actionPoint -= 1;
+        selected = true;
         clickOff();
         // Use the ship's local downward direction
         Vector2 downDirection = transform.TransformDirection(Vector2.down);
@@ -202,23 +207,7 @@ public class ShipBase : MonoBehaviour
 
     public virtual void OnMouseDown()
     {
-        //if (!EventSystem.current.IsPointerOverGameObject())
-        //{
-            if (clicked)
-            {
-                clickOff();
-                ResetAttackRange();
-            }
-            else
-            {
-                clickOff();
-                clicked = true;
-                ShowAttackRange();
-                if (TurnManager.currentTurn == team && actionPoint > 0) ShowButton();
-                ShipPanel.SetActive(true);
-                ShowShipInfo();
-            }
-        //}
+
     }
     public virtual void ShowAttackRange()
     {
@@ -339,5 +328,20 @@ public class ShipBase : MonoBehaviour
     public virtual void ReAssignAttackDir()
     {
 
+    }
+
+    public bool CheckSelected()
+    {
+        if (selected) return true;
+        ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+        foreach (ShipBase obj in foundObjects)
+        {
+            if (obj.selected)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

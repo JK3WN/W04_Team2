@@ -16,6 +16,7 @@ public class CheckButton : MonoBehaviour
     {
         if(ship.tempRotation != ship.transform.rotation)
         {
+            ship.selected = true;
             ship.actionPoint -= 1;
         }
 
