@@ -278,7 +278,7 @@ public class ShipBase : MonoBehaviour
     public void SetArrowButton()
     {
         RectTransform arrowRectTransform = currentArrowButton.GetComponent<RectTransform>();
-        arrowRectTransform.rotation = transform.rotation;
+        arrowRectTransform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90);
         arrowRectTransform.position = transform.position - transform.up * 1.3f;
     }
 

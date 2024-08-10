@@ -78,6 +78,7 @@ public class StraightShip : ShipBase
 
     public override void ShowAttackRange()
     {
+        ResetAttackRange();
         foreach (Transform child in transform)
         {
             if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);

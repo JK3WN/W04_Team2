@@ -75,6 +75,7 @@ public class NewDiagonalShip : ShipBase
 
     public override void ShowAttackRange()
     {
+        ResetAttackRange();
         foreach (Transform child in transform)
         {
             if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
@@ -106,6 +107,8 @@ public class NewDiagonalShip : ShipBase
         lineRenderer.endWidth = 0.1f;
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, attackPositions[attackPositions.Count-1]);
+        GameObject attackTile2 = Instantiate(attackTilePrefab, new Vector3(attackPositions[attackPositions.Count - 1].x, attackPositions[attackPositions.Count - 1].y, 0), Quaternion.identity);
+        attackTile2.transform.SetParent(transform);
 
     }
 
