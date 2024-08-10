@@ -147,6 +147,8 @@ MonoBehaviour:
   hpTextPrefab: {fileID: 2153448624866289204, guid: 378d66df7c6a5a64fb1ef7a2488591d5, type: 3}
   arrowButtonPrefab: {fileID: 8733665216609118779, guid: b111d1256c0672146a0544f9ab13b847, type: 3}
   currentArrowButton: {fileID: 0}
+  apPrefab: {fileID: 3978735696376919252, guid: 361d8e69e15f1bc4fbd1db9c15d23498, type: 3}
+  currentAP: {fileID: 0}
   ShipPanel: {fileID: 0}
   shipSpriteList:
   - {fileID: 21300000, guid: ab972631698b1844c8509c1b25c56cc4, type: 3}

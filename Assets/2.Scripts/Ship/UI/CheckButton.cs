@@ -28,6 +28,7 @@ public class CheckButton : MonoBehaviour
         }
         Destroy(ship.currentButton);
         Destroy(ship.currentArrowButton);
+        Destroy(ship.currentAP);
         ship.ShipPanel.SetActive(false);
         Destroy(this.gameObject);
     }

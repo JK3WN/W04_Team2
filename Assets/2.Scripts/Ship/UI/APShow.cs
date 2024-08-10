@@ -1,28 +1,23 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class APShow : MonoBehaviour
 {
-    public GameObject[] APSlot;
+    public Sprite[] APSlot;
     public int currentAP = 2;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < currentAP && i < APSlot.Length; i++)
-        {
-            APSlot[i].SetActive(true);
-        }
-        for(int i=currentAP; i< APSlot.Length; i++)
-        {
-            APSlot[i].SetActive(false);
-        }
+        sr.sprite = APSlot[currentAP];
     }
 }
