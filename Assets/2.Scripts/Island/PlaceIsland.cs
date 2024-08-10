@@ -24,26 +24,7 @@ public class PlaceIsland : MonoBehaviour
         {
             islandText.text = "Cancel";
             ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
-            foreach (ShipBase obj in foundObjects)
-            {
-                foreach (Transform child in obj.transform)
-                {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
-
-                if (obj.clicked)
-                {
-                    obj.clicked = false;
-                    obj.transform.rotation = obj.tempRotation;
-                    obj.ReAssignAttackDir();
-
-                    Destroy(obj.currentButton);
-                    Destroy(obj.currentCheckButton);
-                    Destroy(obj.currentArrowButton);
-                    Destroy(obj.currentAP);
-                    obj.ShipPanel.SetActive(false);
-                }
-            }
+            foundObjects[0].clickOff();
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             intPos = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
