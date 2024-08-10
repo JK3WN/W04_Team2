@@ -150,8 +150,8 @@ public class TurnManager : MonoBehaviour
             {
                 foreach (Transform child in obj.transform)
                 {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);                }
+                obj.lineRenderer.enabled = false;
             }
         }
         else
