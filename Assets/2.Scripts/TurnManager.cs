@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public enum TurnList
 {
@@ -22,6 +23,7 @@ public class TurnManager : MonoBehaviour
 
     // YJK, UI 관련 오브젝트들
     public Button endTurnButton;
+    public Button[] buttons;
     public TMPro.TextMeshProUGUI turnText, apText;
 
     public GameObject[] NavyVessel, PirateVessel;
@@ -61,6 +63,10 @@ public class TurnManager : MonoBehaviour
         if(GameManager.instance.ActionPoints > 0 || usedAP < 2)
         {
             ConfirmPanel.gameObject.SetActive(true);
+            foreach(Button btn in buttons)
+            {
+                btn.enabled = false;
+            }
         }
         else
         {
@@ -181,6 +187,10 @@ public class TurnManager : MonoBehaviour
 
     public void ConfirmYesPressed()
     {
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = true;
+        }
         usedAP = 0;
         ConfirmPanel.SetActive(false);
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
@@ -192,17 +202,29 @@ public class TurnManager : MonoBehaviour
 
     public void ConfirmNoPressed()
     {
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = true;
+        }
         ConfirmPanel.SetActive(false);
     }
 
     public void SurrenderPressed()
     {
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = false;
+        }
         SurrenderPanel.SetActive(true);
     }
 
     public void SurrenderYesPressed()
     {
         SurrenderPanel.SetActive(false);
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = false;
+        }
         if (currentTurn == TurnList.P1)
         {
             VictoryText.text = "Pirates Victory!";
@@ -221,6 +243,10 @@ public class TurnManager : MonoBehaviour
 
     public void SurrenderNoPressed()
     {
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = true;
+        }
         SurrenderPanel.SetActive(false);
     }
 }
