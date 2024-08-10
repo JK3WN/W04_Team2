@@ -76,6 +76,7 @@ public class TurnManager : MonoBehaviour
             GameManager.instance.ActionPoints = 1;
             ChangeTurnText(currentTurn);
             StartCoroutine("BoatTurn");
+            rangeOn = false;
         }
     }
 
