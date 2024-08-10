@@ -29,7 +29,7 @@ public class TurnManager : MonoBehaviour
     public Sprite NavyImage, PirateImage;
 
     public float eachWeightTime = 5.0f;
-    private bool rangeOn = false;
+    public static bool rangeOn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +61,7 @@ public class TurnManager : MonoBehaviour
         GameManager.instance.ActionPoints = 1;
         ChangeTurnText(currentTurn);
         StartCoroutine("BoatTurn");
+        rangeOn = false;
     }
 
     // YJK, 무게별 함선들을 eachWeightTime마다 시작하라는 이벤트 보냄
@@ -158,13 +159,9 @@ public class TurnManager : MonoBehaviour
         {
             rangeOn=true;
             ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+            foundObjects[0].clickOff();
             foreach (ShipBase obj in foundObjects)
             {
-                foreach (Transform child in obj.transform)
-                {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
-                obj.lineRenderer.enabled = false;
                 obj.ShowAttackRange();
             }
         }

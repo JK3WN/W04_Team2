@@ -232,7 +232,7 @@ public class ShipBase : MonoBehaviour
 
     public virtual void OnMouseDown()
     {
-
+        TurnManager.rangeOn = false;
     }
     public virtual void ShowAttackRange()
     {

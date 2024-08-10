@@ -47,6 +47,7 @@ public class NewDiagonalShip : ShipBase
 
     public override void OnMouseDown()
     {
+        base.OnMouseDown();
         if (clicked)
         {
             clickOff();
