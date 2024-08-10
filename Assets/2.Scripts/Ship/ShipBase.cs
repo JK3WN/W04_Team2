@@ -314,6 +314,7 @@ public class ShipBase : MonoBehaviour
             {
                 if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
             }
+            obj.lineRenderer.enabled = false;
 
             if (obj.clicked)
             {
@@ -321,7 +322,6 @@ public class ShipBase : MonoBehaviour
                 obj.transform.rotation = obj.tempRotation;
                 obj.ReAssignAttackDir();
                 
-                obj.lineRenderer.enabled = false;
                 Destroy(obj.currentButton);
                 Destroy(obj.currentCheckButton);
                 Destroy(obj.currentArrowButton);

@@ -164,6 +164,7 @@ public class TurnManager : MonoBehaviour
                 {
                     if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
                 }
+                obj.lineRenderer.enabled = false;
                 obj.ShowAttackRange();
             }
         }

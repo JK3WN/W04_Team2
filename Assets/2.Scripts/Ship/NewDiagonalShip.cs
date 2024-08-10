@@ -81,6 +81,8 @@ public class NewDiagonalShip : ShipBase
             lineRenderer.enabled = false;
         }
 
+        if (attackPositions.Count < 1) return;
+
         for (int i = 0; i < attackPositions.Count; i++)
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
