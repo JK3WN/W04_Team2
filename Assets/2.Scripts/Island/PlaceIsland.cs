@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class PlaceIsland : MonoBehaviour
 {
-    public GameObject island, islandPreview;
+    public GameObject island, islandPreview, confirmPanel, surrenderPanel;
     public Button islandButton;
+    public TMPro.TextMeshProUGUI islandText;
 
     public Vector2 intPos;
     public bool islandReady = false;
@@ -16,11 +17,34 @@ public class PlaceIsland : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.instance.ActionPoints <= 0 || (int)TurnManager.currentTurn % 2 == 1) islandButton.enabled = false;
+        if(GameManager.instance.ActionPoints <= 0 || (int)TurnManager.currentTurn % 2 == 1 || confirmPanel.activeSelf || surrenderPanel.activeSelf) islandButton.enabled = false;
         else islandButton.enabled = true;
         // YJK, 섬 놓을 준비 하는 버튼 누르면 islandReady를 참으로 만들어 다음 내용 진행
         if (islandReady)
         {
+            islandText.text = "Cancel";
+            ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+            foreach (ShipBase obj in foundObjects)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+                }
+
+                if (obj.clicked)
+                {
+                    obj.clicked = false;
+                    obj.transform.rotation = obj.tempRotation;
+                    obj.ReAssignAttackDir();
+
+                    Destroy(obj.currentButton);
+                    Destroy(obj.currentCheckButton);
+                    Destroy(obj.currentArrowButton);
+                    Destroy(obj.currentAP);
+                    obj.ShipPanel.SetActive(false);
+                }
+            }
+
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             intPos = new Vector2(Mathf.FloorToInt(mousePosition.x) + 0.5f, Mathf.FloorToInt(mousePosition.y) + 0.5f);
             hit = Physics2D.Raycast(intPos, Vector2.zero, Mathf.Infinity);
@@ -47,6 +71,7 @@ public class PlaceIsland : MonoBehaviour
         }
         else
         {
+            islandText.text = "Place Island";
             islandPreview.SetActive(false);
         }
     }

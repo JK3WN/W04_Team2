@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public enum TurnList
 {
@@ -17,14 +18,16 @@ public enum TurnList
 public class TurnManager : MonoBehaviour
 {
     public static TurnList currentTurn = TurnList.P1;
+    public static int usedAP;
     public event Action<int> WeightStart;
 
-    // YJK, UI °ü·Ã ¿ÀºêÁ§Æ®µé
+    // YJK, UI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½
     public Button endTurnButton;
+    public Button[] buttons;
     public TMPro.TextMeshProUGUI turnText, apText;
 
     public GameObject[] NavyVessel, PirateVessel;
-    public GameObject VictoryPanel;
+    public GameObject VictoryPanel, ConfirmPanel, SurrenderPanel;
     public TMPro.TextMeshProUGUI VictoryText;
     public Sprite NavyImage, PirateImage;
 
@@ -34,6 +37,7 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         currentTurn = TurnList.P1;
+        usedAP = 0;
         GameManager.instance.ActionPoints = 1;
         ChangeTurnText(currentTurn);
         GameObject.Find("ShipPanel").SetActive(false);
@@ -42,7 +46,7 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // YJK, currentTurnÀÌ P1ÀÌ³ª P2ÀÏ ¶§¸¸ endTurnButton È°¼ºÈ­
+        // YJK, currentTurnï¿½ï¿½ P1ï¿½Ì³ï¿½ P2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ endTurnButton È°ï¿½ï¿½È­
         if((int)currentTurn % 2 == 0)
         {
             endTurnButton.gameObject.SetActive(true);
@@ -56,15 +60,27 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurnClicked()
     {
-        currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
-        if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
-        GameManager.instance.ActionPoints = 1;
-        ChangeTurnText(currentTurn);
-        StartCoroutine("BoatTurn");
-        rangeOn = false;
+        if(GameManager.instance.ActionPoints > 0 || usedAP < 2)
+        {
+            ConfirmPanel.gameObject.SetActive(true);
+            foreach(Button btn in buttons)
+            {
+                btn.enabled = false;
+            }
+        }
+        else
+        {
+            usedAP = 0;
+            currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
+            if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
+            GameManager.instance.ActionPoints = 1;
+            ChangeTurnText(currentTurn);
+            StartCoroutine("BoatTurn");
+            rangeOn = false;
+        }
     }
 
-    // YJK, ¹«°Ôº° ÇÔ¼±µéÀ» eachWeightTime¸¶´Ù ½ÃÀÛÇÏ¶ó´Â ÀÌº¥Æ® º¸³¿
+    // YJK, ï¿½ï¿½ï¿½Ôºï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ eachWeightTimeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     IEnumerator BoatTurn()
     {
         for(int i = 1; i < 2; i++)
@@ -79,9 +95,9 @@ public class TurnManager : MonoBehaviour
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
         ChangeTurnText(currentTurn);
         yield return new WaitForSeconds(0.3f);
-        if(NavyVessel[0] == null && NavyVessel[1] == null && NavyVessel[2] == null && NavyVessel[3] == null)
+        if(NavyVessel[0] == null && NavyVessel[1] == null && NavyVessel[2] == null && NavyVessel[3] == null && NavyVessel[4] == null)
         {
-            if(PirateVessel[0] == null && PirateVessel[1] == null && PirateVessel[2] == null && PirateVessel[3] == null)
+            if(PirateVessel[0] == null && PirateVessel[1] == null && PirateVessel[2] == null && PirateVessel[3] == null && PirateVessel[4] == null)
             {
                 VictoryText.text = "Draw!";
                 VictoryText.color = Color.black;
@@ -98,7 +114,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
-            if(PirateVessel[0] == null && PirateVessel[1] == null && PirateVessel[2] == null && PirateVessel[3] == null)
+            if(PirateVessel[0] == null && PirateVessel[1] == null && PirateVessel[2] == null && PirateVessel[3] == null && PirateVessel[4] == null)
             {
                 VictoryText.text = "Navy Victory!";
                 VictoryText.color = Color.blue;
@@ -132,7 +148,7 @@ public class TurnManager : MonoBehaviour
 
     public void RestartPressed()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void QuitPressed()
@@ -167,9 +183,47 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    public void Surrender()
+    public void ConfirmYesPressed()
     {
-        if(currentTurn == TurnList.P1)
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = true;
+        }
+        usedAP = 0;
+        ConfirmPanel.SetActive(false);
+        currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
+        if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
+        GameManager.instance.ActionPoints = 1;
+        ChangeTurnText(currentTurn);
+        StartCoroutine("BoatTurn");
+    }
+
+    public void ConfirmNoPressed()
+    {
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = true;
+        }
+        ConfirmPanel.SetActive(false);
+    }
+
+    public void SurrenderPressed()
+    {
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = false;
+        }
+        SurrenderPanel.SetActive(true);
+    }
+
+    public void SurrenderYesPressed()
+    {
+        SurrenderPanel.SetActive(false);
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = false;
+        }
+        if (currentTurn == TurnList.P1)
         {
             VictoryText.text = "Pirates Victory!";
             VictoryText.color = Color.red;
@@ -183,5 +237,14 @@ public class TurnManager : MonoBehaviour
             VictoryPanel.GetComponent<Image>().sprite = NavyImage;
             VictoryPanel.SetActive(true);
         }
+    }
+
+    public void SurrenderNoPressed()
+    {
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = true;
+        }
+        SurrenderPanel.SetActive(false);
     }
 }

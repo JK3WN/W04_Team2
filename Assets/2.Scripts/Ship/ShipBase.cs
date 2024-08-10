@@ -28,12 +28,14 @@ public class ShipBase : MonoBehaviour
     public GameObject buttonPrefab;
     public GameObject currentButton;
     public GameObject checkButtonPrefab;
-    protected GameObject currentCheckButton;
+    public GameObject currentCheckButton;
     public GameObject hpTextPrefab;
     protected GameObject hpUI;
     protected TextMeshProUGUI hpText;
     public GameObject arrowButtonPrefab;
     public GameObject currentArrowButton;
+
+    public GameObject apPrefab, currentAP;
 
     protected TurnManager turnManager;
     public GameObject ShipPanel;
@@ -162,6 +164,7 @@ public class ShipBase : MonoBehaviour
     {
         canMove = true;
         actionPoint -= 1;
+        TurnManager.usedAP++;
         selected = true;
         clickOff();
         // Use the ship's local downward direction
@@ -254,10 +257,12 @@ public class ShipBase : MonoBehaviour
         currentButton = Instantiate(buttonPrefab);
         currentCheckButton = Instantiate(checkButtonPrefab);
         currentArrowButton = Instantiate(arrowButtonPrefab);
+        currentAP = Instantiate(apPrefab);
 
         currentButton.transform.SetParent(canvas.transform, false);
         currentCheckButton.transform.SetParent(canvas.transform, false);
         currentArrowButton.transform.SetParent(canvas.transform, false);
+        currentAP.transform.SetParent(canvas.transform, false);
 
         ButtonScript buttonScript = currentButton.GetComponent<ButtonScript>();
         buttonScript.ship = this;
@@ -273,6 +278,10 @@ public class ShipBase : MonoBehaviour
         RectTransform checkRectTransform = currentCheckButton.GetComponent<RectTransform>();
         if (position.y > 0) checkRectTransform.position = transform.position + new Vector3(0.5f, -0.6f, 0);
         else checkRectTransform.position = transform.position + new Vector3(0.5f, 0.6f, 0);
+
+        currentAP.GetComponent<APShow>().currentAP = actionPoint;
+        if (position.y > 0) currentAP.transform.position = transform.position + new Vector3(0, 0.3f, 0);
+        else currentAP.transform.position = transform.position + new Vector3(0, 0.3f, 0);
     }
 
     public void SetArrowButton()
@@ -348,6 +357,7 @@ public class ShipBase : MonoBehaviour
                 Destroy(obj.currentButton);
                 Destroy(obj.currentCheckButton);
                 Destroy(obj.currentArrowButton);
+                Destroy(obj.currentAP);
                 obj.ShipPanel.SetActive(false);
             }
         }
