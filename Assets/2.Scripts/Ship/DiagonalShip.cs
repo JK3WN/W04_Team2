@@ -47,6 +47,7 @@ public class DiagonalShip : ShipBase
 
     public override void OnMouseDown()
     {
+        base.OnMouseDown();
         if (clicked)
         {
             clickOff();
@@ -75,22 +76,40 @@ public class DiagonalShip : ShipBase
 
     public override void ShowAttackRange()
     {
+        ResetAttackRange();
         foreach (Transform child in transform)
         {
             if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+            lineRenderer.enabled = false;
         }
+
+        if (attackPositions.Count < 1) return;
 
         for (int i = 0; i < attackPositions.Count; i++)
         {
-            GameObject attackTile = Instantiate(attackTilePrefab, new Vector3(attackPositions[i].x, attackPositions[i].y, 0), Quaternion.identity);
-            attackTile.transform.SetParent(transform);
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPositions[i], 0.1f);
             foreach (var collider in hitColliders)
             {
-                if (collider.gameObject.CompareTag("Ship") || collider.gameObject.CompareTag("Land")) return;
-
+                if (collider.gameObject.CompareTag("Ship") || collider.gameObject.CompareTag("Land"))
+                {
+                    GameObject attackTile = Instantiate(attackTilePrefab, new Vector3(attackPositions[i].x, attackPositions[i].y, 0), Quaternion.identity);
+                    attackTile.transform.SetParent(transform);
+                    lineRenderer.enabled = true;
+                    lineRenderer.startWidth = 0.1f;
+                    lineRenderer.endWidth = 0.1f;
+                    lineRenderer.SetPosition(0, transform.position);
+                    lineRenderer.SetPosition(1, attackPositions[i]);
+                    return;
+                }
             }
         }
+        lineRenderer.enabled = true;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, attackPositions[attackPositions.Count - 1]);
+        GameObject attackTile2 = Instantiate(attackTilePrefab, new Vector3(attackPositions[attackPositions.Count - 1].x, attackPositions[attackPositions.Count - 1].y, 0), Quaternion.identity);
+        attackTile2.transform.SetParent(transform);
     }
 
     public override void ResetAttackRange()

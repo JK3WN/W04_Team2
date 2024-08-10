@@ -21,7 +21,7 @@ public class TurnManager : MonoBehaviour
     public static int usedAP;
     public event Action<int> WeightStart;
 
-    // YJK, UI °ü·Ã ¿ÀºêÁ§Æ®µé
+    // YJK, UI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½
     public Button endTurnButton;
     public Button[] buttons;
     public TMPro.TextMeshProUGUI turnText, apText;
@@ -32,7 +32,7 @@ public class TurnManager : MonoBehaviour
     public Sprite NavyImage, PirateImage;
 
     public float eachWeightTime = 5.0f;
-    private bool rangeOn = false;
+    public static bool rangeOn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +46,7 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // YJK, currentTurnÀÌ P1ÀÌ³ª P2ÀÏ ¶§¸¸ endTurnButton È°¼ºÈ­
+        // YJK, currentTurnï¿½ï¿½ P1ï¿½Ì³ï¿½ P2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ endTurnButton È°ï¿½ï¿½È­
         if((int)currentTurn % 2 == 0)
         {
             endTurnButton.gameObject.SetActive(true);
@@ -79,7 +79,7 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    // YJK, ¹«°Ôº° ÇÔ¼±µéÀ» eachWeightTime¸¶´Ù ½ÃÀÛÇÏ¶ó´Â ÀÌº¥Æ® º¸³¿
+    // YJK, ï¿½ï¿½ï¿½Ôºï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ eachWeightTimeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     IEnumerator BoatTurn()
     {
         for(int i = 1; i < 2; i++)
@@ -166,20 +166,17 @@ public class TurnManager : MonoBehaviour
             {
                 foreach (Transform child in obj.transform)
                 {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);                }
+                obj.lineRenderer.enabled = false;
             }
         }
         else
         {
             rangeOn=true;
             ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+            foundObjects[0].clickOff();
             foreach (ShipBase obj in foundObjects)
             {
-                foreach (Transform child in obj.transform)
-                {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-                }
                 obj.ShowAttackRange();
             }
         }

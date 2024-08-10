@@ -53,6 +53,7 @@ public class ShipBase : MonoBehaviour
     private bool canMove;
 
     public bool selected;
+    public LineRenderer lineRenderer;
     private void Awake()
     {
         // YJK, 함선 정보 보여줄 UI 참조
@@ -61,6 +62,7 @@ public class ShipBase : MonoBehaviour
 
     public virtual void Start()
     {
+        lineRenderer = GetComponent<LineRenderer>();
         shipSprite = gameObject.GetComponentInChildren<SpriteRenderer>();
         if (team == TurnList.P1) shipSprite.sprite = shipSpriteList[0];
         else shipSprite.sprite = shipSpriteList[1];
@@ -233,7 +235,7 @@ public class ShipBase : MonoBehaviour
 
     public virtual void OnMouseDown()
     {
-
+        TurnManager.rangeOn = false;
     }
     public virtual void ShowAttackRange()
     {
@@ -285,7 +287,7 @@ public class ShipBase : MonoBehaviour
     public void SetArrowButton()
     {
         RectTransform arrowRectTransform = currentArrowButton.GetComponent<RectTransform>();
-        arrowRectTransform.rotation = transform.rotation;
+        arrowRectTransform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90);
         arrowRectTransform.position = transform.position - transform.up * 1.3f;
     }
 
@@ -344,6 +346,7 @@ public class ShipBase : MonoBehaviour
             {
                 if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
             }
+            obj.lineRenderer.enabled = false;
 
             if (obj.clicked)
             {

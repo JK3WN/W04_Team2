@@ -21,16 +21,8 @@ public class CheckButton : MonoBehaviour
             TurnManager.usedAP++;
         }
 
-        ship.clicked = false;
-        ship.ResetAttackRange();
-        foreach (Transform child in ship.transform)
-        {
-            if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-        }
-        Destroy(ship.currentButton);
-        Destroy(ship.currentArrowButton);
-        Destroy(ship.currentAP);
-        ship.ShipPanel.SetActive(false);
+        ship.tempRotation = ship.transform.rotation;
+        ship.clickOff();
         Destroy(this.gameObject);
     }
 }
