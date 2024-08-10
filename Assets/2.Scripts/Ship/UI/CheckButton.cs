@@ -20,15 +20,8 @@ public class CheckButton : MonoBehaviour
             ship.actionPoint -= 1;
         }
 
-        ship.clicked = false;
-        ship.ResetAttackRange();
-        foreach (Transform child in ship.transform)
-        {
-            if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
-        }
-        Destroy(ship.currentButton);
-        Destroy(ship.currentArrowButton);
-        ship.ShipPanel.SetActive(false);
+        ship.tempRotation = ship.transform.rotation;
+        ship.clickOff();
         Destroy(this.gameObject);
     }
 }
