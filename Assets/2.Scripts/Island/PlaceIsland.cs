@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlaceIsland : MonoBehaviour
 {
     public GameObject island, islandPreview, confirmPanel, surrenderPanel;
-    public Button islandButton;
+    public Button islandButton, rangeButton;
     public TMPro.TextMeshProUGUI islandText;
 
     public Vector2 intPos;
@@ -23,6 +23,7 @@ public class PlaceIsland : MonoBehaviour
         if (islandReady)
         {
             islandText.text = "Cancel";
+            rangeButton.enabled = false;
             ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
             foundObjects[0].clickOff();
 
@@ -53,6 +54,7 @@ public class PlaceIsland : MonoBehaviour
         else
         {
             islandText.text = "Place Island";
+            rangeButton.enabled = true;
             islandPreview.SetActive(false);
         }
     }
@@ -60,5 +62,9 @@ public class PlaceIsland : MonoBehaviour
     public void PlaceIslandClicked()
     {
         islandReady = !islandReady;
+        if (islandReady)
+        {
+            TurnManager.rangeOn = false;
+        }
     }
 }

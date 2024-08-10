@@ -71,6 +71,7 @@ public class TurnManager : MonoBehaviour
         else
         {
             usedAP = 0;
+            gameObject.GetComponent<PlaceIsland>().islandReady = false;
             currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
             if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
             GameManager.instance.ActionPoints = 1;
@@ -190,6 +191,7 @@ public class TurnManager : MonoBehaviour
             btn.enabled = true;
         }
         usedAP = 0;
+        gameObject.GetComponent<PlaceIsland>().islandReady = false;
         ConfirmPanel.SetActive(false);
         currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
         if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
