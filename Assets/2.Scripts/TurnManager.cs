@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public enum TurnList
 {
@@ -28,7 +29,7 @@ public class TurnManager : MonoBehaviour
     public Sprite NavyImage, PirateImage;
 
     public float eachWeightTime = 5.0f;
-
+    private bool rangeOn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -137,5 +138,52 @@ public class TurnManager : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Application Quit");
+    }
+
+    public void ShowAttackRange()
+    {
+        if (rangeOn)
+        {
+            rangeOn = false;
+            ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+            foreach (ShipBase obj in foundObjects)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+                }
+            }
+        }
+        else
+        {
+            rangeOn=true;
+            ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
+            foreach (ShipBase obj in foundObjects)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+                }
+                obj.ShowAttackRange();
+            }
+        }
+    }
+
+    public void Surrender()
+    {
+        if(currentTurn == TurnList.P1)
+        {
+            VictoryText.text = "Pirates Victory!";
+            VictoryText.color = Color.red;
+            VictoryPanel.GetComponent<Image>().sprite = PirateImage;
+            VictoryPanel.SetActive(true);
+        }
+        else
+        {
+            VictoryText.text = "Navy Victory!";
+            VictoryText.color = Color.blue;
+            VictoryPanel.GetComponent<Image>().sprite = NavyImage;
+            VictoryPanel.SetActive(true);
+        }
     }
 }
