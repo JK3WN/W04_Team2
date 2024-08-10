@@ -17,6 +17,7 @@ public enum TurnList
 public class TurnManager : MonoBehaviour
 {
     public static TurnList currentTurn = TurnList.P1;
+    public static int usedAP;
     public event Action<int> WeightStart;
 
     // YJK, UI 관련 오브젝트들
@@ -24,7 +25,7 @@ public class TurnManager : MonoBehaviour
     public TMPro.TextMeshProUGUI turnText, apText;
 
     public GameObject[] NavyVessel, PirateVessel;
-    public GameObject VictoryPanel;
+    public GameObject VictoryPanel, ConfirmPanel, SurrenderPanel;
     public TMPro.TextMeshProUGUI VictoryText;
     public Sprite NavyImage, PirateImage;
 
@@ -34,6 +35,7 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         currentTurn = TurnList.P1;
+        usedAP = 0;
         GameManager.instance.ActionPoints = 1;
         ChangeTurnText(currentTurn);
         GameObject.Find("ShipPanel").SetActive(false);
@@ -56,11 +58,19 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurnClicked()
     {
-        currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
-        if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
-        GameManager.instance.ActionPoints = 1;
-        ChangeTurnText(currentTurn);
-        StartCoroutine("BoatTurn");
+        if(GameManager.instance.ActionPoints > 0 || usedAP < 2)
+        {
+            ConfirmPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            usedAP = 0;
+            currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
+            if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
+            GameManager.instance.ActionPoints = 1;
+            ChangeTurnText(currentTurn);
+            StartCoroutine("BoatTurn");
+        }
     }
 
     // YJK, 무게별 함선들을 eachWeightTime마다 시작하라는 이벤트 보냄
@@ -131,7 +141,7 @@ public class TurnManager : MonoBehaviour
 
     public void RestartPressed()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void QuitPressed()
@@ -169,9 +179,31 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    public void Surrender()
+    public void ConfirmYesPressed()
     {
-        if(currentTurn == TurnList.P1)
+        usedAP = 0;
+        ConfirmPanel.SetActive(false);
+        currentTurn = (TurnList)(((int)currentTurn + 1) % 4);
+        if (GameObject.Find("ShipPanel") != null) GameObject.Find("ShipPanel").SetActive(false);
+        GameManager.instance.ActionPoints = 1;
+        ChangeTurnText(currentTurn);
+        StartCoroutine("BoatTurn");
+    }
+
+    public void ConfirmNoPressed()
+    {
+        ConfirmPanel.SetActive(false);
+    }
+
+    public void SurrenderPressed()
+    {
+        SurrenderPanel.SetActive(true);
+    }
+
+    public void SurrenderYesPressed()
+    {
+        SurrenderPanel.SetActive(false);
+        if (currentTurn == TurnList.P1)
         {
             VictoryText.text = "Pirates Victory!";
             VictoryText.color = Color.red;
@@ -185,5 +217,10 @@ public class TurnManager : MonoBehaviour
             VictoryPanel.GetComponent<Image>().sprite = NavyImage;
             VictoryPanel.SetActive(true);
         }
+    }
+
+    public void SurrenderNoPressed()
+    {
+        SurrenderPanel.SetActive(false);
     }
 }

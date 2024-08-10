@@ -28,7 +28,7 @@ public class ShipBase : MonoBehaviour
     public GameObject buttonPrefab;
     public GameObject currentButton;
     public GameObject checkButtonPrefab;
-    protected GameObject currentCheckButton;
+    public GameObject currentCheckButton;
     public GameObject hpTextPrefab;
     protected GameObject hpUI;
     protected TextMeshProUGUI hpText;
@@ -162,6 +162,7 @@ public class ShipBase : MonoBehaviour
     {
         canMove = true;
         actionPoint -= 1;
+        TurnManager.usedAP++;
         selected = true;
         clickOff();
         // Use the ship's local downward direction

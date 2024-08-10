@@ -18,6 +18,7 @@ public class CheckButton : MonoBehaviour
         {
             ship.selected = true;
             ship.actionPoint -= 1;
+            TurnManager.usedAP++;
         }
 
         ship.clicked = false;
