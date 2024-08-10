@@ -22,6 +22,8 @@ public class ShipBase : MonoBehaviour
     public bool clicked;
     public Quaternion tempRotation;
 
+    
+
     public Canvas canvas;
     public GameObject buttonPrefab;
     public GameObject currentButton;
@@ -167,7 +169,18 @@ public class ShipBase : MonoBehaviour
         // Draw the ray in the scene view for debugging
         Debug.DrawLine(upPos.position, upPos.position + (Vector3)downDirection * 100f, Color.red, 2f);
 
-        StartCoroutine(MoveToPos(ray));
+        Debug.Log(Mathf.Round(Vector2.Distance(transform.position, ray.point)));
+
+        if (Mathf.Round(Vector2.Distance(transform.position, ray.point)) > 1.5f)
+        {
+            StartCoroutine(MoveToPos(ray));
+        }
+        else if (Mathf.Round(Vector2.Distance(transform.position, ray.point)) < 1.5f)
+        {
+            transform.Translate(Vector2.down) ;
+            StartCoroutine(MoveToStartPos());
+
+        }
 
     }
     IEnumerator MoveToPos(RaycastHit2D rays)
@@ -177,11 +190,21 @@ public class ShipBase : MonoBehaviour
             yield return null;
             if (rays.collider != null)
             {
-                // Draw the current position to the target position
                 Debug.DrawLine(upPos.position, rays.point, Color.green);
 
                 float length = Mathf.Round(Vector2.Distance(transform.position, rays.point));
 
+                if (!rays.collider.CompareTag("Dirt") && Mathf.Round(Vector2.Distance(transform.position, rays.point)) == 0)
+                {
+                    canMove = false;
+                    transform.position = new Vector2(Mathf.Floor(transform.position.x) + 0.5f, Mathf.Floor(transform.position.y) + 0.5f);
+                    break;
+                }
+
+                transform.Translate(Vector2.down * 10 * Time.deltaTime);
+                
+
+                /*
                 if (rays.collider.CompareTag("Dirt"))
                 {
                     if (Mathf.Round(Vector2.Distance(transform.position, rays.collider.transform.position)) == 0)
@@ -191,18 +214,18 @@ public class ShipBase : MonoBehaviour
                         break;
                     }
                 }
-                else if (!rays.collider.CompareTag("Dirt") && Mathf.Round(Vector2.Distance(transform.position, rays.point)) == 0)
-                {
-                    canMove = false;
-                    transform.position = new Vector2(Mathf.Floor(transform.position.x) + 0.5f, Mathf.Floor(transform.position.y) + 0.5f);
-                    break;
-                }
+                else 
+                */
 
-                transform.Translate(Vector2.down * 10 * Time.deltaTime);
-                
+          
             }
         }
         RepositionUI();
+    }
+    IEnumerator MoveToStartPos()
+    {
+        yield return new WaitForSeconds(0.5f);
+        transform.Translate(Vector2.up);
     }
 
     public virtual void OnMouseDown()
@@ -344,4 +367,15 @@ public class ShipBase : MonoBehaviour
 
         return true;
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ship"))
+        {
+            Debug.Log("ÆÄ±«µÊ");
+            currentHP--;
+            ShowHP();
+            DeathCheck();
+        }
+    }
+
 }

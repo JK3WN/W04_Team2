@@ -76,6 +76,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 160
   upPos: {fileID: 6861293762771947195}
+  selected: 0
 --- !u!61 &3293755226096883325
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -105,7 +106,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
