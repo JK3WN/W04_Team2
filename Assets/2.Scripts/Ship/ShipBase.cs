@@ -299,7 +299,7 @@ public class ShipBase : MonoBehaviour
 
         hpText = hpUI.GetComponent<TextMeshProUGUI>();
         RectTransform hpUITransform = hpUI.GetComponent<RectTransform>();
-        hpUITransform.position = transform.position + new Vector3(0, -0.2f, 0);
+        hpUITransform.position = transform.position + new Vector3(0, -0.3f, 0);
 
         ShowHP();
     }
