@@ -180,12 +180,12 @@ public class ShipBase : MonoBehaviour
         {
             StartCoroutine(MoveToPos(ray));
         }
-        else if (Mathf.Round(Vector2.Distance(transform.position, ray.point)) < 1.5f)
-        {
-            transform.Translate(Vector2.down) ;
-            StartCoroutine(MoveToStartPos());
+        //else if (Mathf.Round(Vector2.Distance(transform.position, ray.point)) < 1.5f)
+        //{
+        //    transform.Translate(Vector2.down) ;
+        //    StartCoroutine(MoveToStartPos());
 
-        }
+        //}
 
     }
     IEnumerator MoveToPos(RaycastHit2D rays)
