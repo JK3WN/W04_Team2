@@ -154,8 +154,7 @@ public class TurnManager : MonoBehaviour
 
     public void QuitPressed()
     {
-        Application.Quit();
-        Debug.Log("Application Quit");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void ShowAttackRange()
@@ -168,7 +167,8 @@ public class TurnManager : MonoBehaviour
             {
                 foreach (Transform child in obj.transform)
                 {
-                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);                }
+                    if (!child.gameObject.CompareTag("Pos")) Destroy(child.gameObject);
+                }
                 obj.lineRenderer.enabled = false;
             }
         }
