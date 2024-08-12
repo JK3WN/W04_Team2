@@ -17,8 +17,10 @@ public class PlaceIsland : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.instance.ActionPoints <= 0 || (int)TurnManager.currentTurn % 2 == 1 || confirmPanel.activeSelf || surrenderPanel.activeSelf) islandButton.enabled = false;
+        if((int)TurnManager.currentTurn % 2 == 1 || confirmPanel.activeSelf || surrenderPanel.activeSelf) islandButton.enabled = false;
         else islandButton.enabled = true;
+        if (GameManager.instance.ActionPoints <= 0) islandButton.gameObject.SetActive(false);
+        else islandButton.gameObject.SetActive(true);
         // YJK, 섬 놓을 준비 하는 버튼 누르면 islandReady를 참으로 만들어 다음 내용 진행
         if (islandReady)
         {

@@ -41,6 +41,7 @@ public class TurnManager : MonoBehaviour
         GameManager.instance.ActionPoints = 1;
         ChangeTurnText(currentTurn);
         GameObject.Find("ShipPanel").SetActive(false);
+        apText.text = "";
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class TurnManager : MonoBehaviour
         {
             endTurnButton.gameObject.SetActive(false);
         }
-        apText.text = "Island: " + GameManager.instance.ActionPoints.ToString();
+        //apText.text = "Island: " + GameManager.instance.ActionPoints.ToString();
     }
 
     public void EndTurnClicked()
