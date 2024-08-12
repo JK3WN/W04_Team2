@@ -10,14 +10,14 @@ public class MenuManager : MonoBehaviour
     public TMPro.TextMeshProUGUI pageNumText;
     public GameObject helpImage;
     public string helpPath = "Assets/4.Images/Help";
-    private List<Sprite> helpList;
+    public List<Sprite> helpList;
     private int currentPage, maxPage;
 
     // Start is called before the first frame update
     void Start()
     {
         helpList = new List<Sprite>();
-        string[] files = Directory.GetFiles(helpPath, "*.png");
+        string[] files = Directory.GetFiles(helpPath, "*");
         foreach (string file in files)
         {
             byte[] fileData = File.ReadAllBytes(file);
@@ -34,7 +34,7 @@ public class MenuManager : MonoBehaviour
     void Update()
     {
         pageNumText.text = currentPage + " / " + maxPage;
-        helpImage.GetComponent<SpriteRenderer>().sprite = helpList[currentPage - 1];
+        //helpImage.GetComponent<SpriteRenderer>().sprite = helpList[currentPage - 1];
     }
 
     public void StartPressed()
