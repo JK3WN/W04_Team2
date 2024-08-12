@@ -77,7 +77,7 @@ public class ShipBase : MonoBehaviour
         
         currentHP = weight;
         actionPoint = 2;
-        selected = false;
+        //selected = false;
         CreateHP();
     }
 
@@ -96,7 +96,7 @@ public class ShipBase : MonoBehaviour
 
         if (TurnManager.currentTurn == (team+1)) Attack(); // °ø°Ý±Ç?
         actionPoint = 2;
-        selected = false;
+        //selected = false;
     }
 
     public virtual void Attack() // attack
@@ -165,7 +165,7 @@ public class ShipBase : MonoBehaviour
         canMove = true;
         actionPoint -= 1;
         TurnManager.usedAP++;
-        selected = true;
+        //selected = true;
         clickOff();
         // Use the ship's local downward direction
         Vector2 downDirection = transform.TransformDirection(Vector2.down);
@@ -382,6 +382,7 @@ public class ShipBase : MonoBehaviour
 
     public bool CheckSelected()
     {
+        return true;
         if (selected) return true;
         ShipBase[] foundObjects = FindObjectsOfType<ShipBase>();
         foreach (ShipBase obj in foundObjects)
