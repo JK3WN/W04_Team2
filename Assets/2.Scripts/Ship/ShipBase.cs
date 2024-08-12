@@ -308,7 +308,9 @@ public class ShipBase : MonoBehaviour
     {
         if (hpText != null)
         {
-            hpText.text = "HP: " + currentHP.ToString();
+            //hpText.text = "HP: " + currentHP.ToString();
+            hpUI.GetComponent<HPShow>().currentHP = currentHP;
+            hpText.text = "";
         }
         else
         {

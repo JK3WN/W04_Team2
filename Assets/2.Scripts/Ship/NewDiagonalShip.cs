@@ -61,7 +61,7 @@ public class NewDiagonalShip : ShipBase
             tempRotation = transform.rotation;
             ShowAttackRange();
             if (TurnManager.currentTurn == team && actionPoint > 0 && CheckSelected()) ShowButton();
-            ShipPanel.SetActive(true);
+            //ShipPanel.SetActive(true);
             ShowShipInfo();
         }
     }
