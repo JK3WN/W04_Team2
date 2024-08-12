@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -16,8 +17,9 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         helpList = new List<Sprite>();
-        string[] files = Directory.GetFiles(helpPath, "*");
+        string[] files = Directory.GetFiles(helpPath, "*.png");
         foreach (string file in files)
         {
             byte[] fileData = File.ReadAllBytes(file);
@@ -26,6 +28,7 @@ public class MenuManager : MonoBehaviour
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             helpList.Add(sprite);
         }
+        */
         maxPage = helpList.Count;
         currentPage = 1;
     }
@@ -34,7 +37,7 @@ public class MenuManager : MonoBehaviour
     void Update()
     {
         pageNumText.text = currentPage + " / " + maxPage;
-        //helpImage.GetComponent<SpriteRenderer>().sprite = helpList[currentPage - 1];
+        helpImage.GetComponent<Image>().sprite = helpList[currentPage - 1];
     }
 
     public void StartPressed()
