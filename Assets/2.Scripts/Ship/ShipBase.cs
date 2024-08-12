@@ -154,9 +154,9 @@ public class ShipBase : MonoBehaviour
     public virtual void Rotate()
     {
         transform.Rotate(0, 0, 90);
-        SetArrowButton();
         if (tempRotation != transform.rotation) currentArrowButton.SetActive(false);
         else currentArrowButton.SetActive(true);
+        SetArrowButton();
     }
 
 
@@ -270,8 +270,8 @@ public class ShipBase : MonoBehaviour
         checkButton.ship = this;
         ArrowButton arrowButton = currentArrowButton.GetComponent<ArrowButton>();
         arrowButton.ship = this;
-
         SetArrowButton();
+
         RectTransform buttonRectTransform = currentButton.GetComponent<RectTransform>();
         if (position.y > 0) buttonRectTransform.position = transform.position + new Vector3(-0.1f, -0.6f, 0);
         else buttonRectTransform.position = transform.position + new Vector3(-0.1f, 0.6f, 0);
@@ -286,6 +286,16 @@ public class ShipBase : MonoBehaviour
 
     public void SetArrowButton()
     {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position - transform.up, 0.1f);
+        foreach (var collider in hitColliders)
+        {
+            if (collider.gameObject.CompareTag("Ship") || collider.gameObject.CompareTag("Land"))
+            {
+                currentArrowButton.SetActive(false);
+                return;
+            }
+
+        }
         RectTransform arrowRectTransform = currentArrowButton.GetComponent<RectTransform>();
         arrowRectTransform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90);
         arrowRectTransform.position = transform.position - transform.up * 1.3f;
